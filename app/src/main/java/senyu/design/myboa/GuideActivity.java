@@ -2,7 +2,7 @@ package senyu.design.myboa;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 
 import com.chechezhi.ui.guide.AbsGuideActivity;
 import com.chechezhi.ui.guide.SingleElement;
@@ -11,14 +11,14 @@ import com.chechezhi.ui.guide.SinglePage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExampleGuideActivity extends AbsGuideActivity {
-
+public class GuideActivity extends AbsGuideActivity {
+//todo(@SenYu)安排自己的启动页素材
 
     @Override
     public List<SinglePage> buildGuideContent() {
         List<SinglePage> guideContent = new ArrayList<SinglePage>();
         SinglePage page01 = new SinglePage();
-        page01.mBackground = getResources().getDrawable(R.drawable.bg_page_01);
+        page01.mBackground = ContextCompat.getDrawable(this,R.drawable.bg_page_01);
         SingleElement e01 = new SingleElement(200, 200, 400, 400, 0.0f, 1.0f, BitmapFactory.decodeResource(
                 getResources(), R.drawable.ic_stuff));
         SingleElement e02 = new SingleElement(700, 800, 700, 100, 0.0f, 1.0f, BitmapFactory.decodeResource(
@@ -28,7 +28,7 @@ public class ExampleGuideActivity extends AbsGuideActivity {
         guideContent.add(page01);
 
         SinglePage page02 = new SinglePage();
-        page02.mBackground = getResources().getDrawable(R.drawable.bg_page_02);
+        page02.mBackground = ContextCompat.getDrawable(this,R.drawable.bg_page_02);
         SingleElement e03 = new SingleElement(400, 400, -100, -100, 1.0f, 0.0f, BitmapFactory.decodeResource(
                 getResources(), R.drawable.ic_stuff));
         SingleElement e04 = new SingleElement(700, 100, 700, -200, 1.0f, 0.0f, BitmapFactory.decodeResource(
@@ -38,7 +38,7 @@ public class ExampleGuideActivity extends AbsGuideActivity {
         guideContent.add(page02);
 
         SinglePage page03 = new SinglePage();
-        page03.mBackground = getResources().getDrawable(R.drawable.bg_page_03);
+        page03.mBackground =ContextCompat.getDrawable(this,R.drawable.bg_page_03);
         SingleElement e05 = new SingleElement(-100, 2000, 100, 100, 1.0f, 1.0f, BitmapFactory.decodeResource(
                 getResources(), R.drawable.ic_stuff));
         SingleElement e06 = new SingleElement(100, 2000, 300, 120, 1.0f, 1.0f, BitmapFactory.decodeResource(
@@ -54,7 +54,7 @@ public class ExampleGuideActivity extends AbsGuideActivity {
         guideContent.add(page03);
 
         SinglePage page04 = new SinglePage();
-        page04.mBackground = getResources().getDrawable(R.drawable.bg_page_04);
+        page04.mBackground = ContextCompat.getDrawable(this,R.drawable.bg_page_04);
         SingleElement e09 = new SingleElement(100, 100, 3000, 3000, 1.0f, 1.0f, BitmapFactory.decodeResource(
                 getResources(), R.drawable.ic_stuff));
         SingleElement e10 = new SingleElement(300, 120, 3000, 3000, 1.0f, 1.0f, BitmapFactory.decodeResource(
@@ -70,7 +70,7 @@ public class ExampleGuideActivity extends AbsGuideActivity {
         guideContent.add(page04);
 
         SinglePage page05 = new SinglePage();
-        page05.mCustomFragment = new EntryFragment();
+        page05.mCustomFragment = new LastGuidePageFragment();
         guideContent.add(page05);
 
         return guideContent;

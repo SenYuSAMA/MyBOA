@@ -5,4 +5,10 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="entry">Entry</string>
     <string name="welcome">Welcome</string>
+    <string name="fragment_add">fragment_add</string>
+    <string name="fragment_money">fragment_money</string>
+    <string name="fragment_more">fragment_more</string>
+    <string name="fragment_table">fragment_table</string>
+    <string name="fragment_tax">fragment_tax</string>
+    <string name="material_is_good">Material is Good</string>
 </resources>

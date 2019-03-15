@@ -27,5 +27,11 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    //引导页
     implementation project(path: ':guideshowlib')
+    //下方导航栏
+    implementation 'me.majiajie:pager-bottom-tab-strip:2.3.0'
+    //toasty
+    implementation 'com.github.grenderg:toasty:1.4.1'
+
 }
