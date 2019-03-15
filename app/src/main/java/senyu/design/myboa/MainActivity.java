@@ -35,11 +35,11 @@ public class MainActivity extends FragmentActivity {
             initUI();
             tab = findViewById(R.id.tab_host);
             final NavigationController navigationController = tab.material()
-                    .addItem(R.drawable.money_unselected,R.drawable.money_selected,"资产",getResources().getColor(R.color.textSelected))
-                    .addItem(R.drawable.table_unselected,R.drawable.table_selected,"报表",getResources().getColor(R.color.textSelected))
-                    .addItem(R.drawable.add_selected,R.drawable.add_unselected,"记账",getResources().getColor(R.color.textSelected))
-                    .addItem(R.drawable.tax_unselected,R.drawable.tax_selected,"个税",getResources().getColor(R.color.textSelected))
-                    .addItem(R.drawable.more_unselected,R.drawable.more_selected,"更多",getResources().getColor(R.color.textSelected))
+                    .addItem(R.drawable.money_unselected,R.drawable.money_selected,"资产",getResources().getColor(R.color.selectedBlue))
+                    .addItem(R.drawable.table_unselected,R.drawable.table_selected,"报表",getResources().getColor(R.color.selectedBlue))
+                    .addItem(R.drawable.add_selected,R.drawable.add_unselected,"记账",getResources().getColor(R.color.selectedBlue))
+                    .addItem(R.drawable.tax_unselected,R.drawable.tax_selected,"个税",getResources().getColor(R.color.selectedBlue))
+                    .addItem(R.drawable.more_unselected,R.drawable.more_selected,"更多",getResources().getColor(R.color.selectedBlue))
                     .build();
             //添加点击事件
             navigationController.addSimpleTabItemSelectedListener(new SimpleTabItemSelectedListener() {
