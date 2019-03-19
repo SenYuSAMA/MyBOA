@@ -1,5 +1,6 @@
-package senyu.design.myboa;
+package senyu.design.myboa.activity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v4.content.ContextCompat;
@@ -11,6 +12,9 @@ import com.chechezhi.ui.guide.SinglePage;
 import java.util.ArrayList;
 import java.util.List;
 
+import senyu.design.myboa.R;
+import senyu.design.myboa.fragment.LastGuidePageFragment;
+
 public class GuideActivity extends AbsGuideActivity {
 //todo(@SenYu)安排自己的启动页素材
 
@@ -18,7 +22,7 @@ public class GuideActivity extends AbsGuideActivity {
     public List<SinglePage> buildGuideContent() {
         List<SinglePage> guideContent = new ArrayList<SinglePage>();
         SinglePage page01 = new SinglePage();
-        page01.mBackground = ContextCompat.getDrawable(this,R.drawable.bg_page_01);
+        page01.mBackground = ContextCompat.getDrawable(this, R.drawable.bg_page_01);
         SingleElement e01 = new SingleElement(200, 200, 400, 400, 0.0f, 1.0f, BitmapFactory.decodeResource(
                 getResources(), R.drawable.ic_stuff));
         SingleElement e02 = new SingleElement(700, 800, 700, 100, 0.0f, 1.0f, BitmapFactory.decodeResource(
@@ -95,7 +99,8 @@ public class GuideActivity extends AbsGuideActivity {
         // Time to entry your app! We just finish the activity, replace it with
         // your code.
 
-        finish();
+        Intent intent = new Intent(GuideActivity.this,MainActivity.class);
+        startActivity(intent);
     }
 
     /**

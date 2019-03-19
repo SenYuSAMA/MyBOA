@@ -1,4 +1,4 @@
-package senyu.design.myboa;
+package senyu.design.myboa.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,12 @@ import android.support.v4.app.FragmentTransaction;
 import me.majiajie.pagerbottomtabstrip.NavigationController;
 import me.majiajie.pagerbottomtabstrip.PageNavigationView;
 import me.majiajie.pagerbottomtabstrip.listener.SimpleTabItemSelectedListener;
+import senyu.design.myboa.R;
+import senyu.design.myboa.fragment.AddFragment;
+import senyu.design.myboa.fragment.MoneyFragment;
+import senyu.design.myboa.fragment.MoreFragment;
+import senyu.design.myboa.fragment.TableFragment;
+import senyu.design.myboa.fragment.TaxFragment;
 import senyu.design.myboa.utils.SPUtils;
 
 public class MainActivity extends FragmentActivity {

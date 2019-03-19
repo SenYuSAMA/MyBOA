@@ -4,7 +4,7 @@
     android:background="@color/unSelectedGrey"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MoneyFragment">
+    tools:context=".fragment.MoneyFragment">
     <RelativeLayout
         android:background="#FFF"
         android:id="@+id/money_frag_head_rl"

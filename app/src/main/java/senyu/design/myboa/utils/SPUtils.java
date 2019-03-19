@@ -188,5 +188,5 @@ public class SPUtils
             editor.commit();
         }
     }
-    public static final String firstCome = "first_come";
+    public static final String FIRST_COME = "first_come";
 }

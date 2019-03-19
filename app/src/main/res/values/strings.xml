@@ -15,4 +15,17 @@
     <string name="owe_num">欠款</string>
     <string name="test_owe">这是欠款画面</string>
     <string name="test_balance">这是余额画面</string>
+    <string name="wechat_pay">微信钱包</string>
+    <string name="zero">0.00</string>
+    <string name="hint_text">微信钱包余额</string>
+    <string name="alipay">支付宝</string>
+    <string name="alipay_num">支付宝余额</string>
+    <string name="cash">现金</string>
+    <string name="cash_num">现金总数</string>
+    <string name="lent_text">应收账</string>
+    <string name="others_owe_me">别人欠我的钱</string>
+    <string name="credit_card">银行卡余额</string>
+    <string name="in_bank">在储蓄卡中的余额</string>
+    <string name="invess_text">投资账户</string>
+    <string name="invest_account">投资账户上的资金</string>
 </resources>

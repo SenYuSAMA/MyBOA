@@ -1,9 +1,9 @@
-package senyu.design.myboa;
+package senyu.design.myboa.fragment;
 
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
+
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -15,6 +15,11 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import senyu.design.myboa.R;
+import senyu.design.myboa.adapter.MyFragmentAdapter;
+import senyu.design.myboa.fragment.BalanceFragment;
+import senyu.design.myboa.fragment.OweFragment;
 
 
 /**
