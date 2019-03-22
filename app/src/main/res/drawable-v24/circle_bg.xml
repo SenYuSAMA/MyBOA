@@ -8,7 +8,7 @@
     <!-- 边框的颜色和粗细 -->
     <stroke
         android:width="2dp"
-        android:color="@color/boardDarkBlue"
+        android:color="@color/navy"
         />
 
     <!-- android:radius 圆角的半径 -->

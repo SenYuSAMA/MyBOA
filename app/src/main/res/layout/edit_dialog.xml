@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/edit_bg"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="2dp"
+    >
+
+    <TextView
+        android:layout_centerHorizontal="true"
+        android:id="@+id/edit_title"
+        android:layout_marginTop="50dp"
+        android:textSize="20sp"
+        android:textColor="@color/selectedBlue"
+        android:layout_gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:text="请输入数值" />
+
+    <EditText
+        android:id="@+id/edit_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/edit_title"
+        android:layout_gravity="center"
+        android:layout_marginTop="18dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:fontFamily="sans-serif"
+        android:textColor="@color/selectedBlue"
+        android:textCursorDrawable="@color/unSelectedGrey"
+        android:background= "@color/white"
+        android:hint="0.00"
+        />
+
+</RelativeLayout>

@@ -1,9 +1,16 @@
 package senyu.design.myboa.utils;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.List;
 import java.util.Map;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import senyu.design.myboa.bean.BalanceBean;
 
 public class SPUtils
 {
@@ -189,4 +196,24 @@ public class SPUtils
         }
     }
     public static final String FIRST_COME = "first_come";
+    public static final String BALANCE_BEAN_KEY = "BalanceBean";
+
+    public static boolean  saveBeantoSP(List<BalanceBean> datas,Context context){
+        Gson gson = new Gson();
+        String jsonStr = gson.toJson(datas);
+        put(context,"BalanceBean",jsonStr);
+        return true;
+    }
+
+    public static List<BalanceBean> getBeanFromSP(Context context,String key,String defaultStr){
+        String jsonStr = (String)get(context,key,defaultStr);
+        Log.w("======================","getBeanFromSP: " + jsonStr );
+        if(jsonStr != null){
+            Gson gson = new Gson();
+            List<BalanceBean> datas = gson.fromJson(jsonStr,new TypeToken<List<BalanceBean>>(){}.getType());
+            return datas;
+        }
+        return null;
+    }
+
 }

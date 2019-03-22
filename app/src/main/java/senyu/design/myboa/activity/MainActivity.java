@@ -30,10 +30,10 @@ public class MainActivity extends FragmentActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        boolean firstCome = (Boolean)SPUtils.get(this,SPUtils.firstCome,true);
+        boolean firstCome = (Boolean)SPUtils.get(this,SPUtils.FIRST_COME,true);
         //判断是否是第一次启动，是的话就打开引导页
         if(firstCome){
-            SPUtils.put(this,SPUtils.firstCome,false);
+            SPUtils.put(this,SPUtils.FIRST_COME,false);
             Intent i = new Intent(MainActivity.this, GuideActivity.class);
             startActivity(i);
         }

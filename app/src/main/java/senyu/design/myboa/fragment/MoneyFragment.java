@@ -28,12 +28,8 @@ import senyu.design.myboa.fragment.OweFragment;
 public class MoneyFragment extends Fragment {
     private List<Fragment>  mList;
     private ViewPager mViewPager;
-    private ImageView mBalanceIv;
-    private ImageView mOweIv;
     private TextView mBalanceTv;
     private TextView mOweTv;
-    private RelativeLayout mBalanceRl;
-    private RelativeLayout mOweRl;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,17 +43,13 @@ public class MoneyFragment extends Fragment {
     private void bindViews(View view) {
         mBalanceTv = view.findViewById(R.id.balance_tv);
         mOweTv = view.findViewById(R.id.owe_tv);
-        mBalanceIv = view.findViewById(R.id.balance_iv);
-        mOweIv = view.findViewById(R.id.owe_iv);
-        mBalanceRl = view.findViewById(R.id.balance_rl);
-        mOweRl = view.findViewById(R.id.owe_rl);
-        mBalanceRl.setOnClickListener(new View.OnClickListener() {
+        mBalanceTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mViewPager.setCurrentItem(0);
             }
         });
-        mOweRl.setOnClickListener(new View.OnClickListener() {
+        mOweTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mViewPager.setCurrentItem(1);
@@ -80,15 +72,15 @@ public class MoneyFragment extends Fragment {
             @Override
             public void onPageSelected(int position) {
                 if(position == 0){
-                    mBalanceIv.setImageResource(R.drawable.happy_selected);
-                    mOweIv.setImageResource(R.drawable.owe_unselected);
-                    mBalanceTv.setTextColor(ContextCompat.getColor(view.getContext(),R.color.selectedBlue));
-                    mOweTv.setTextColor(ContextCompat.getColor(view.getContext(),R.color.unSelectedGrey));
+                    mBalanceTv.setTextColor(getResources().getColor(R.color.white));
+                    mOweTv.setTextColor(getResources().getColor(R.color.navy));
+                    mBalanceTv.setBackgroundColor(getResources().getColor(R.color.navy));
+                    mOweTv.setBackgroundColor(getResources().getColor(R.color.white));
                 }else if(position == 1){
-                    mBalanceIv.setImageResource(R.drawable.happy_unselected);
-                    mOweIv.setImageResource(R.drawable.owe_selected);
-                    mBalanceTv.setTextColor(ContextCompat.getColor(view.getContext(),R.color.unSelectedGrey));
-                    mOweTv.setTextColor(ContextCompat.getColor(view.getContext(),R.color.selectedBlue));
+                    mBalanceTv.setTextColor(getResources().getColor(R.color.navy));
+                    mOweTv.setTextColor(getResources().getColor(R.color.white));
+                    mBalanceTv.setBackgroundColor(getResources().getColor(R.color.white));
+                    mOweTv.setBackgroundColor(getResources().getColor(R.color.navy));
                 }
             }
 

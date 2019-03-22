@@ -1,12 +1,19 @@
 package senyu.design.myboa.bean;
 
 public class Account  {
-    public static final int WECHAT_PAY = 0;
-    public static final int ALI_PAY = 1;
+    public static final int WECHAT_PAY = 4;
+    public static final int ALI_PAY = 5;
     public static final int CREDIT_CARD = 2;
-    public static final int CASH = 3;
-    public static final int INVEST = 4;
-    public static final int LENT = 5;
+    public static final int CASH = 0;
+    public static final int INVEST = 1;
+    public static final int LENT = 3;
+
+    private int layoutCode;
+    private String title;
+    private int iconID;
+    private int backGroundColorId;
+    private double amount;
+
 
     public int getLayoutCode() {
         return layoutCode;
@@ -16,8 +23,7 @@ public class Account  {
         this.layoutCode = layoutCode;
     }
 
-    private int layoutCode;
-    private String title;
+
 
     public double getAmount() {
         return amount;
@@ -27,7 +33,7 @@ public class Account  {
         this.amount = amount;
     }
 
-    private double amount;
+
 
 
     public String getTitle() {
