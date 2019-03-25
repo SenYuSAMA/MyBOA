@@ -36,4 +36,6 @@
     <string name="jd">京东白条</string>
     <string name="credit_owe">信用卡</string>
     <string name="borrow">借款</string>
+    <string name="total_owe">总欠款</string>
+    <string name="totalbalance">总余额</string>
 </resources>

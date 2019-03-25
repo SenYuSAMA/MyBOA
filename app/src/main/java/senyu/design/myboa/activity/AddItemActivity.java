@@ -6,15 +6,10 @@ import android.view.View;
 import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-
-import java.util.List;
-
 import senyu.design.myboa.CallBackInterface;
 import senyu.design.myboa.R;
-import senyu.design.myboa.adapter.MoneyRecyclerViewAdapter;
 import senyu.design.myboa.bean.BalanceBean;
 import senyu.design.myboa.bean.OweBean;
-import senyu.design.myboa.fragment.BalanceFragment;
 
 public class AddItemActivity extends AppCompatActivity implements View.OnClickListener {
     private LinearLayout cashLL;

@@ -10,6 +10,8 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.callback.ItemDragAndSwipeCallback;
 import com.chad.library.adapter.base.listener.OnItemDragListener;
@@ -28,6 +30,7 @@ public class BalanceFragment extends Fragment {
     private RecyclerView recyclerView;
     private List<BalanceBean> mDatas;
     private MoneyRecyclerViewAdapter adapter;
+    private TextView totalCountTV;
     public BalanceFragment() {
         // Required empty public constructor
     }
@@ -37,6 +40,9 @@ public class BalanceFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_balance, container, false);
         recyclerView = view.findViewById(R.id.balance_rcv);
+        totalCountTV = view.findViewById(R.id.amount);
+        String countText = (String) SPUtils.get(getActivity(),"totalBalance","0.0");
+        totalCountTV.setText(countText);
         initData();
         //初始化adapter和recyclerview
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -66,6 +72,7 @@ public class BalanceFragment extends Fragment {
             public void onItemSwiped(RecyclerView.ViewHolder viewHolder, int pos) {
                 mDatas.remove(pos);
                 adapter.notifyDataSetChanged();
+                countTotal();
                 SPUtils.saveBeantoSP(mDatas,getActivity());
             }
 
@@ -88,6 +95,7 @@ public class BalanceFragment extends Fragment {
             @Override
             public void onItemDragEnd(RecyclerView.ViewHolder viewHolder, int pos) {
                 adapter.notifyDataSetChanged();
+                countTotal();
                 SPUtils.saveBeantoSP(mDatas,getActivity());
             }
         };
@@ -150,6 +158,7 @@ public class BalanceFragment extends Fragment {
                         int position = bundle.getInt("position");
                         mDatas.get(position).setAmount(Double.valueOf(myData));
                         adapter.notifyDataSetChanged();
+                        countTotal();
                         SPUtils.saveBeantoSP(mDatas,getActivity());
                     }
                 }
@@ -189,6 +198,17 @@ public class BalanceFragment extends Fragment {
    }
     public  void noticeAndSave(){
         adapter.notifyDataSetChanged();
+        countTotal();
         SPUtils.saveBeantoSP(mDatas,getActivity());
     }
+
+    public void countTotal(){
+        Double count = 0.0;
+        for(int i = 0; i < mDatas.size();i++){
+            count+= mDatas.get(i).getAmount();
+        }
+        totalCountTV.setText(String.valueOf(count));
+        SPUtils.put(getActivity(),"totalBalance",count);
+    }
+
 }
