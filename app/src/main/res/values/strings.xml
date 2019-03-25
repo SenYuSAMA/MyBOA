@@ -28,4 +28,12 @@
     <string name="in_bank">在储蓄卡中的余额</string>
     <string name="invess_text">投资账户</string>
     <string name="invest_account">投资账户上的资金</string>
+    <string name="back">返回</string>
+    <string name="add_account">请选择账户类型</string>
+    <string name="balance_type">余额类型</string>
+    <string name="owe_type">欠款类型</string>
+    <string name="huabei">蚂蚁花呗</string>
+    <string name="jd">京东白条</string>
+    <string name="credit_owe">信用卡</string>
+    <string name="borrow">借款</string>
 </resources>

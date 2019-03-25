@@ -1,25 +1,22 @@
 package senyu.design.myboa.bean;
 
-import com.google.gson.Gson;
+public class OweBean {
 
-public class BalanceBean{
-        public final static class ID {
-        public static final int WECHAT_PAY = 4;
-        public static final int ALI_PAY = 5;
-        public static final int CREDIT_CARD = 2;
-        public static final int CASH = 0;
-        public static final int INVEST = 1;
-        public static final int LENT = 3;
+    public final static class ID {
+        public static final int HUA_BEI = 0;
+        public static final int CREDIT_OWE = 1;
+        public static final int JD_BAITIAO = 2;
+        public static final int OWE_BILL = 3;
     }
 
-        private int layoutCode;
-        private String title;
-        private int iconID;
-        private int backgroundResID;
-        private double amount;
-        private String content;
+    private int layoutCode;
+    private String title;
+    private int iconID;
+    private int backgroundResID;
+    private double amount;
+    private String content;
 
-    public BalanceBean(int layoutCode, String title, int iconID, int backgroundResID, double amount, String content) {
+    public OweBean(int layoutCode, String title, int iconID, int backgroundResID, double amount, String content) {
         this.layoutCode = layoutCode;
         this.title = title;
         this.iconID = iconID;
@@ -27,7 +24,7 @@ public class BalanceBean{
         this.amount = amount;
         this.content = content;
     }
-    public BalanceBean(){
+    public OweBean(){
 
     }
 

@@ -43,6 +43,16 @@
             </LinearLayout>
         </LinearLayout>
 
+
+        <ImageView
+            android:layout_alignTop="@+id/head_ll_middle"
+            android:layout_alignBottom="@id/head_ll_middle"
+            android:layout_marginEnd="15dp"
+            android:src="@drawable/add_item"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/add_item_iv_btn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"/>
     </RelativeLayout>
 
     <android.support.v4.view.ViewPager

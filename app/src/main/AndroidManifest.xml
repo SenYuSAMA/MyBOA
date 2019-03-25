@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:theme,android:icon">
-        <activity android:name=".activity.GuideActivity"></activity>
+        <activity android:name=".activity.AddItemActivity"></activity>
+        <activity android:name=".activity.GuideActivity" />
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

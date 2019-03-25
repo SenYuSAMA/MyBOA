@@ -24,9 +24,6 @@ public class MyEditNumDialog extends DialogFragment {
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         final LayoutInflater inflater = getActivity().getLayoutInflater();
         final View view = inflater.inflate(R.layout.edit_dialog,null);
-/*        Bundle bundle = getArguments();
-        EditText editText = view.findViewById(R.id.edit_content);
-        editText.setText(String.valueOf(bundle.getDouble("amount")));*/
         builder.setView(view)
                 .setPositiveButton("好的", new DialogInterface.OnClickListener() {
                     @Override
