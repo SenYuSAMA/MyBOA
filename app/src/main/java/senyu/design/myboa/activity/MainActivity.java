@@ -1,13 +1,22 @@
 package senyu.design.myboa.activity;
 
 import android.content.Intent;
+import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.Display;
+import android.view.View;
+import android.widget.PopupWindow;
+import android.widget.TimePicker;
+
+import com.bigkoo.pickerview.view.TimePickerView;
 
 import me.majiajie.pagerbottomtabstrip.NavigationController;
 import me.majiajie.pagerbottomtabstrip.PageNavigationView;
+import me.majiajie.pagerbottomtabstrip.listener.OnTabItemSelectedListener;
 import me.majiajie.pagerbottomtabstrip.listener.SimpleTabItemSelectedListener;
 import senyu.design.myboa.R;
 import senyu.design.myboa.fragment.AddFragment;
@@ -25,7 +34,8 @@ public class MainActivity extends FragmentActivity {
     TaxFragment mTaxFragment;
     MoreFragment mMoreFragment;
     FragmentManager mFragmentManager;
-
+    PopupWindow mPopupWindow;
+    View mPopView;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,14 +53,13 @@ public class MainActivity extends FragmentActivity {
             final NavigationController navigationController = tab.material()
                     .addItem(R.drawable.money_unselected,R.drawable.money_selected,"资产",getResources().getColor(R.color.selectedBlue))
                     .addItem(R.drawable.table_unselected,R.drawable.table_selected,"报表",getResources().getColor(R.color.selectedBlue))
-                    .addItem(R.drawable.add_selected,R.drawable.add_unselected,"记账",getResources().getColor(R.color.selectedBlue))
+                    .addItem(R.drawable.add_selected,R.drawable.add_selected,"记账",getResources().getColor(R.color.red))
                     .addItem(R.drawable.tax_unselected,R.drawable.tax_selected,"个税",getResources().getColor(R.color.selectedBlue))
                     .addItem(R.drawable.more_unselected,R.drawable.more_selected,"更多",getResources().getColor(R.color.selectedBlue))
+                    .dontTintIcon()
                     .build();
             //添加点击事件
-            navigationController.addSimpleTabItemSelectedListener(new SimpleTabItemSelectedListener() {
-
-
+            navigationController.addTabItemSelectedListener(new OnTabItemSelectedListener() {
                 @Override
                 public void onSelected(int index, int old) {
                     switch (index){
@@ -73,13 +82,15 @@ public class MainActivity extends FragmentActivity {
                             transaction2.commit();
                             break;
                         case 2:
-                            FragmentTransaction transaction3 = mFragmentManager.beginTransaction();
+                            Intent intent = new Intent(MainActivity.this,AddRecordActivity.class);
+                            startActivity(intent);
+                           /* FragmentTransaction transaction3= mFragmentManager.beginTransaction();
                             transaction3.hide(mMoneyFragment);
                             transaction3.hide(mTaxFragment);
                             transaction3.hide(mTableFragment);
                             transaction3.hide(mMoreFragment);
                             transaction3.show(mAddFragment);
-                            transaction3.commit();
+                            transaction3.commit();*/
                             break;
                         case 3:
                             FragmentTransaction transaction4= mFragmentManager.beginTransaction();
@@ -98,10 +109,16 @@ public class MainActivity extends FragmentActivity {
                             transaction5.show(mMoreFragment);
                             transaction5.hide(mAddFragment);
                             transaction5.commit();
-                             break;
+                            break;
                         default:
                             break;
                     }
+                }
+
+                @Override
+                public void onRepeat(int index) {
+                    Intent intent = new Intent(MainActivity.this,AddRecordActivity.class);
+                    startActivity(intent);
                 }
             });
         }

@@ -1,9 +1,15 @@
 package senyu.design.myboa.bean;
 
+import com.contrarywind.interfaces.IPickerViewData;
 import com.google.gson.Gson;
 
-public class BalanceBean{
-        public final static class ID {
+public class BalanceBean implements IPickerViewData {
+    @Override
+    public String getPickerViewText() {
+        return title;
+    }
+
+    public final static class ID {
         public static final int WECHAT_PAY = 4;
         public static final int ALI_PAY = 5;
         public static final int CREDIT_CARD = 2;
@@ -70,4 +76,6 @@ public class BalanceBean{
     public void setContent(String content) {
         this.content = content;
     }
+
+
 }

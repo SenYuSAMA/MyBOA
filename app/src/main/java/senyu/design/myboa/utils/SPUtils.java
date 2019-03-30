@@ -200,7 +200,7 @@ public class SPUtils
     public static final String BALANCE_BEAN_KEY = "BalanceBean";
     public static final String OWE_BEAN_KEY = "OweBean";
 
-    public static boolean  saveBeantoSP(List<BalanceBean> datas,Context context){
+public static boolean  saveBeantoSP(List<BalanceBean> datas,Context context){
         Gson gson = new Gson();
         String jsonStr = gson.toJson(datas);
         put(context,BALANCE_BEAN_KEY,jsonStr);

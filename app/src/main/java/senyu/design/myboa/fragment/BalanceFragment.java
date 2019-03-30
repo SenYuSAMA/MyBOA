@@ -170,19 +170,19 @@ public class BalanceFragment extends Fragment {
    public void addItem(int layoutID){
         switch (layoutID){
             case BalanceBean.ID.CASH:
-                BalanceBean cash = new BalanceBean(BalanceBean.ID.CASH, "现金", R.drawable.cash, R.drawable.cash_bg, 0, "剩余现金总额");
+                BalanceBean cash = new BalanceBean(BalanceBean.ID.CASH, "现金" , R.drawable.cash, R.drawable.cash_bg, 0, "剩余现金总额");
                 mDatas.add(cash);
                 break;
             case BalanceBean.ID.INVEST:
-                BalanceBean invest = new BalanceBean(BalanceBean.ID.INVEST, "投资账户", R.drawable.invest, R.drawable.invest_bg, 0, "投资账户上的资金");
+                BalanceBean invest = new BalanceBean(BalanceBean.ID.INVEST, "投资账户" , R.drawable.invest, R.drawable.invest_bg, 0, "投资账户上的资金");
                 mDatas.add(invest);
                 break;
             case BalanceBean.ID.LENT:
-                BalanceBean lent = new BalanceBean(BalanceBean.ID.LENT, "应收帐", R.drawable.lent, R.drawable.lent_bg, 0, "别人欠我的钱");
+                BalanceBean lent = new BalanceBean(BalanceBean.ID.LENT, "应收帐" , R.drawable.lent, R.drawable.lent_bg, 0, "别人欠我的钱");
                 mDatas.add(lent);
                 break;
             case BalanceBean.ID.CREDIT_CARD:
-                BalanceBean bank = new BalanceBean(BalanceBean.ID.CREDIT_CARD, "储蓄卡余额", R.drawable.credit_card, R.drawable.credit_card_bg, 0, "储蓄卡余额");
+                BalanceBean bank = new BalanceBean(BalanceBean.ID.CREDIT_CARD, "储蓄卡余额" , R.drawable.credit_card, R.drawable.credit_card_bg, 0, "储蓄卡余额");
                 mDatas.add(bank);
                 break;
             case BalanceBean.ID.WECHAT_PAY:
@@ -210,5 +210,4 @@ public class BalanceFragment extends Fragment {
         totalCountTV.setText(String.valueOf(count));
         SPUtils.put(getActivity(),"totalBalance",count);
     }
-
 }
