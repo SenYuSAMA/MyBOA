@@ -1,11 +1,15 @@
 package senyu.design.myboa.bean;
 
 
-public class Record  {
+import java.io.Serializable;
+
+public class Record implements Serializable {
+
     private double cost;
     private String date;
     private String byTitle;
     private String usage;
+    private boolean plusOrNot;
 
     public double getCost() {
         return cost;
@@ -37,5 +41,18 @@ public String getByTitle() {
 
     public void setUsage(String usage) {
         this.usage = usage;
+    }
+
+    public boolean isPlusOrNot() {
+        return plusOrNot;
+    }
+
+    public void setPlusOrNot(boolean plusOrNot) {
+        this.plusOrNot = plusOrNot;
+    }
+
+    @Override
+    public String toString() {
+        return date + String.valueOf(cost) + byTitle + usage + plusOrNot;
     }
 }

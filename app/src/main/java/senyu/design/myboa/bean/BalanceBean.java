@@ -3,7 +3,7 @@ package senyu.design.myboa.bean;
 import com.contrarywind.interfaces.IPickerViewData;
 import com.google.gson.Gson;
 
-public class BalanceBean implements IPickerViewData {
+public class BalanceBean extends FinanceBean {
     @Override
     public String getPickerViewText() {
         return title;

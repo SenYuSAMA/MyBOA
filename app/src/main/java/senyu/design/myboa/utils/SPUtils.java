@@ -1,6 +1,7 @@
 package senyu.design.myboa.utils;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import android.content.Context;
@@ -11,6 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import senyu.design.myboa.bean.BalanceBean;
+import senyu.design.myboa.bean.FinanceBean;
 import senyu.design.myboa.bean.OweBean;
 
 public class SPUtils
@@ -232,5 +234,18 @@ public static boolean  saveBeantoSP(List<BalanceBean> datas,Context context){
         }
         return null;
     }
+
+    public static List<FinanceBean> getFinanceBean(Context context){
+            List<OweBean> oweList = getOweFromSP(context,SPUtils.OWE_BEAN_KEY,"");
+            List<BalanceBean> balanceList = getBeanFromSP(context,SPUtils.BALANCE_BEAN_KEY,"");
+            List<FinanceBean> result = new ArrayList<>();
+            if(balanceList != null) {
+                result.addAll(balanceList);
+            }
+        if (oweList != null) {
+            result.addAll(oweList);
+        }
+            return  result;
+        }
 
 }

@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.widget.PopupWindow;
@@ -14,11 +16,13 @@ import android.widget.TimePicker;
 
 import com.bigkoo.pickerview.view.TimePickerView;
 
+import es.dmoral.toasty.Toasty;
 import me.majiajie.pagerbottomtabstrip.NavigationController;
 import me.majiajie.pagerbottomtabstrip.PageNavigationView;
 import me.majiajie.pagerbottomtabstrip.listener.OnTabItemSelectedListener;
 import me.majiajie.pagerbottomtabstrip.listener.SimpleTabItemSelectedListener;
 import senyu.design.myboa.R;
+import senyu.design.myboa.bean.Record;
 import senyu.design.myboa.fragment.AddFragment;
 import senyu.design.myboa.fragment.MoneyFragment;
 import senyu.design.myboa.fragment.MoreFragment;
@@ -34,8 +38,7 @@ public class MainActivity extends FragmentActivity {
     TaxFragment mTaxFragment;
     MoreFragment mMoreFragment;
     FragmentManager mFragmentManager;
-    PopupWindow mPopupWindow;
-    View mPopView;
+    private static final int RESULT_CODE_ADDRECORD = 923;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,14 +86,7 @@ public class MainActivity extends FragmentActivity {
                             break;
                         case 2:
                             Intent intent = new Intent(MainActivity.this,AddRecordActivity.class);
-                            startActivity(intent);
-                           /* FragmentTransaction transaction3= mFragmentManager.beginTransaction();
-                            transaction3.hide(mMoneyFragment);
-                            transaction3.hide(mTaxFragment);
-                            transaction3.hide(mTableFragment);
-                            transaction3.hide(mMoreFragment);
-                            transaction3.show(mAddFragment);
-                            transaction3.commit();*/
+                            startActivityForResult(intent,RESULT_CODE_ADDRECORD);
                             break;
                         case 3:
                             FragmentTransaction transaction4= mFragmentManager.beginTransaction();
@@ -117,8 +113,10 @@ public class MainActivity extends FragmentActivity {
 
                 @Override
                 public void onRepeat(int index) {
-                    Intent intent = new Intent(MainActivity.this,AddRecordActivity.class);
-                    startActivity(intent);
+                    if(index == 2) {
+                        Intent intent = new Intent(MainActivity.this, AddRecordActivity.class);
+                        startActivityForResult(intent,RESULT_CODE_ADDRECORD);
+                    }
                 }
             });
         }
@@ -146,4 +144,20 @@ public class MainActivity extends FragmentActivity {
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        switch (requestCode){
+            case RESULT_CODE_ADDRECORD:
+                Log.d("123","走到了");
+                Record record = null;
+                if (data != null) {
+                    record = (Record)data.getSerializableExtra("data");
+                    Toasty.success(this,record.toString()).show();
+                }
+
+                break;
+
+                default:break;
+        }
+    }
 }

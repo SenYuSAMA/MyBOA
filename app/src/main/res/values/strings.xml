@@ -42,4 +42,8 @@
     <string name="select_item">请选择账户</string>
     <string name="input_count">请输入金额</string>
     <string name="select_type">请选择消费用途</string>
+    <string name="cost">消费</string>
+    <string name="income">收入</string>
+    <string name="eat">吃</string>
+    <string name="drink">喝</string>
 </resources>

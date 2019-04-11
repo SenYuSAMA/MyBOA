@@ -1,6 +1,13 @@
 package senyu.design.myboa.bean;
 
-public class OweBean {
+import com.contrarywind.interfaces.IPickerViewData;
+
+public class OweBean extends FinanceBean{
+
+    @Override
+    public String getPickerViewText() {
+        return title;
+    }
 
     public final static class ID {
         public static final int HUA_BEI = 0;
