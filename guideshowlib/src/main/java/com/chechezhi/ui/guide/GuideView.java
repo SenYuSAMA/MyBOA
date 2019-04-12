@@ -121,7 +121,6 @@ public class GuideView extends View implements OnPageChangeListener {
 
     @Override
     public void onPageScrollStateChanged(int state) {
-        // TODO Auto-generated method stub
 
     }
 
@@ -134,7 +133,6 @@ public class GuideView extends View implements OnPageChangeListener {
 
     @Override
     public void onPageSelected(int index) {
-        // TODO Auto-generated method stub
 
     }
 

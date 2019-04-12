@@ -38,6 +38,7 @@ public class MainActivity extends FragmentActivity {
     TaxFragment mTaxFragment;
     MoreFragment mMoreFragment;
     FragmentManager mFragmentManager;
+    NavigationController mNavigationController;
     private static final int RESULT_CODE_ADDRECORD = 923;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,7 +54,7 @@ public class MainActivity extends FragmentActivity {
         else{
             initUI();
             tab = findViewById(R.id.tab_host);
-            final NavigationController navigationController = tab.material()
+            mNavigationController = tab.material()
                     .addItem(R.drawable.money_unselected,R.drawable.money_selected,"资产",getResources().getColor(R.color.selectedBlue))
                     .addItem(R.drawable.table_unselected,R.drawable.table_selected,"报表",getResources().getColor(R.color.selectedBlue))
                     .addItem(R.drawable.add_selected,R.drawable.add_selected,"记账",getResources().getColor(R.color.red))
@@ -62,7 +63,7 @@ public class MainActivity extends FragmentActivity {
                     .dontTintIcon()
                     .build();
             //添加点击事件
-            navigationController.addTabItemSelectedListener(new OnTabItemSelectedListener() {
+            mNavigationController.addTabItemSelectedListener(new OnTabItemSelectedListener() {
                 @Override
                 public void onSelected(int index, int old) {
                     switch (index){
@@ -145,6 +146,12 @@ public class MainActivity extends FragmentActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        mNavigationController.setSelect(0);
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         switch (requestCode){
             case RESULT_CODE_ADDRECORD:
@@ -153,6 +160,10 @@ public class MainActivity extends FragmentActivity {
                 if (data != null) {
                     record = (Record)data.getSerializableExtra("data");
                     Toasty.success(this,record.toString()).show();
+                    /*mTableFragment.setTestTV(record.toString());*/
+                    mTableFragment.upDate(record);
+                    mMoneyFragment.upDate(record);
+                    //todo 存到SP，从SP拿，鲁棒性，界面优化，网络存储
                 }
 
                 break;

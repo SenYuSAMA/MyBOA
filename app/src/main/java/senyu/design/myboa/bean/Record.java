@@ -11,6 +11,18 @@ public class Record implements Serializable {
     private String usage;
     private boolean plusOrNot;
 
+
+    public Record(double cost, String date, String byTitle, String usage, boolean plusOrNot) {
+        this.cost = cost;
+        this.date = date;
+        this.byTitle = byTitle;
+        this.usage = usage;
+        this.plusOrNot = plusOrNot;
+    }
+    public Record(){
+
+    }
+
     public double getCost() {
         return cost;
     }

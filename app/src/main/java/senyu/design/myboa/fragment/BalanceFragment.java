@@ -210,4 +210,14 @@ public class BalanceFragment extends Fragment {
         totalCountTV.setText(String.valueOf(count));
         SPUtils.put(getActivity(),"totalBalance",count);
     }
+
+    public List<BalanceBean> getmDatas() {
+        return mDatas;
+    }
+
+    public void update(int i, double cost, boolean plusOrNot) {
+            mDatas.get(i).computerAmount(cost,plusOrNot);
+            adapter.notifyDataSetChanged();
+            countTotal();
+    }
 }

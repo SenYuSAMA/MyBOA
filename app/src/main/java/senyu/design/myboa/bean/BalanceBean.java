@@ -77,5 +77,13 @@ public class BalanceBean extends FinanceBean {
         this.content = content;
     }
 
+    public double computerAmount(Double value,boolean plusOrNot){
+        if(plusOrNot){
+            amount += value;
+        }else{
+            amount -= value;
+        }
+        return amount;
+    }
 
 }

@@ -1,41 +1,28 @@
 package senyu.design.myboa.activity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.TimePicker;
-import android.widget.Toast;
-
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bigkoo.pickerview.view.TimePickerView;
-
-import java.sql.Time;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-
 import es.dmoral.toasty.Toasty;
 import senyu.design.myboa.R;
-import senyu.design.myboa.bean.BalanceBean;
 import senyu.design.myboa.bean.FinanceBean;
 import senyu.design.myboa.bean.Record;
 import senyu.design.myboa.utils.SPUtils;
@@ -91,7 +78,7 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         mBuilder = new TimePickerBuilder(this, new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddhh");
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日hh时");
                     String text = simpleDateFormat.format(date);
                     mRecord.setDate(text);
                     mDateTV.setText(text);
@@ -116,14 +103,12 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
                 break;
             case R.id.iv_check:
                 String str = mCountET.getText().toString();
-
                 if (str.length() != 0 && mRecord.getByTitle()!=null && mCountET.getText()!=null && mRecord.getUsage()!=null ){
                     mRecord.setCost(Double.valueOf(str));
                     Intent intent = new Intent();
                     intent.putExtra("data",mRecord);
                     setResult(RESULT_CODE_ADDRECORD,intent);
                     finish();
-                    //todo 传这个bean回去记录那边 然后自我关闭
                 }else{
                     Toasty.error(this,"有东西没填完，请重试！").show();
                 }
@@ -149,12 +134,14 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         mThreeList = new ArrayList<>();
         mThreeList.add(getString(R.string.eat));
         mThreeList.add(getString(R.string.drink));
+        mThreeList.add("工资");
+        mThreeList.add("捡到/丢失");
 
         OptionsPickerView pvNoLinkOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
                 mRecord.setByTitle(mTwoList.get(options2).getPickerViewText());
-                mRecord.setPlusOrNot(mOneList.get(options1).equals(R.string.income));
+                mRecord.setPlusOrNot(mOneList.get(options1).equals(getResources().getString(R.string.income)));
                 mRecord.setUsage(mThreeList.get(options3));
                 String str = mOneList.get(options1) +  mTwoList.get(options2).getPickerViewText() + mThreeList.get(options3);
                 mItemTV.setText(str);

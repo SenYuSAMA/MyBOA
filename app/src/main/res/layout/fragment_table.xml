@@ -4,11 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.TableFragment">
+<!--todo 在这上方加bar或者是table chart等东西-->
+  <android.support.v7.widget.RecyclerView
+      android:id="@+id/table_recyclerview"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/fragment_table" />
+  </android.support.v7.widget.RecyclerView>
 
 </FrameLayout>

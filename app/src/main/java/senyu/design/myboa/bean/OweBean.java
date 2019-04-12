@@ -74,4 +74,14 @@ public class OweBean extends FinanceBean{
     public void setContent(String content) {
         this.content = content;
     }
+
+    public double computerAmount(double cost, boolean plusOrNot) {
+        if(plusOrNot){
+            amount += cost;
+        }else{
+            amount -= cost;
+        }
+        return amount;
+    }
+
 }

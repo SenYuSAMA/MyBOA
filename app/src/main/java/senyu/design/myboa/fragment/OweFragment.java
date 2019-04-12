@@ -208,4 +208,15 @@ public class OweFragment extends Fragment {
         totaloweTV.setText(String.valueOf(count));
         SPUtils.put(getActivity(),"totalOwe",count);
     }
+
+    public List<OweBean> getmDatas() {
+        return mDatas;
+    }
+
+
+    public void update(int j, double cost, boolean plusOrNot) {
+        mDatas.get(j).computerAmount(cost,plusOrNot);
+        adapter.notifyDataSetChanged();
+        countTotal();
+    }
 }

@@ -33,7 +33,6 @@ public class MyAdapter extends BaseItemDraggableAdapter<Account,BaseViewHolder> 
                 .registerItemType(Account.LENT,R.layout.lent_item)
                 .registerItemType(Account.INVEST,R.layout.invest_item)
                 .registerItemType(Account.CREDIT_CARD,R.layout.credit_card_item);
-                //todo 弄alipay的界面
 
     }
 

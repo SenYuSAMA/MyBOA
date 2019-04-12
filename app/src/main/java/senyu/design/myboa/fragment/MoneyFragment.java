@@ -20,6 +20,7 @@ import senyu.design.myboa.activity.AddItemActivity;
 import senyu.design.myboa.adapter.MyFragmentAdapter;
 import senyu.design.myboa.bean.BalanceBean;
 import senyu.design.myboa.bean.OweBean;
+import senyu.design.myboa.bean.Record;
 
 
 /**
@@ -31,6 +32,8 @@ public class MoneyFragment extends Fragment {
     private TextView mBalanceTv;
     private TextView mOweTv;
     private ImageView addItemIvBtn;
+    private BalanceFragment mBalanceFragment;
+    private OweFragment mOweFragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -72,16 +75,14 @@ public class MoneyFragment extends Fragment {
         AddItemActivity.getInstance().setOnCallBackListener(new CallBackInterface() {
             @Override
             public void onCallBack(int layoutID) {
-                BalanceFragment balanceFragment = (BalanceFragment)mList.get(0);
-                balanceFragment.addItem(layoutID);
-                balanceFragment.noticeAndSave();
+                mBalanceFragment.addItem(layoutID);
+                mBalanceFragment.noticeAndSave();
             }
 
             @Override
             public void onOweCallBack(int layoutID) {
-                OweFragment oweFragment = (OweFragment)mList.get(1);
-                oweFragment.addItem(layoutID);
-                oweFragment.noticeAndSave();
+                mOweFragment.addItem(layoutID);
+                mOweFragment.noticeAndSave();
             }
         });
     }
@@ -89,8 +90,10 @@ public class MoneyFragment extends Fragment {
     private void initViewPager(final View view) {
         mViewPager = view.findViewById(R.id.view_pager);
         mList = new ArrayList<>();
-        mList.add(new BalanceFragment());
-        mList.add(new OweFragment());
+        mBalanceFragment = new BalanceFragment();
+        mOweFragment = new OweFragment();
+        mList.add(mBalanceFragment);
+        mList.add(mOweFragment);
         mViewPager.setAdapter(new MyFragmentAdapter(getFragmentManager(),mList));
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -127,4 +130,26 @@ public class MoneyFragment extends Fragment {
     }
 
 
+    public void upDate(Record record) {
+        String title = record.getByTitle();
+        int balanceSize = mBalanceFragment.getmDatas().size();
+        int oweSize = mOweFragment.getmDatas().size();
+        int i = 0;
+        int j = 0;
+        while(i < balanceSize){
+            if(title.equals(mBalanceFragment.getmDatas().get(i).getTitle())){
+                mBalanceFragment.update(i,record.getCost(),record.isPlusOrNot());
+                return;
+            }
+            i++;
+        }
+
+        while( j < oweSize){
+            if(title.equals(mOweFragment.getmDatas().get(j).getTitle())){
+                mOweFragment.update(j,record.getCost(),record.isPlusOrNot());
+                return;
+            }
+            j++;
+        }
+    }
 }
