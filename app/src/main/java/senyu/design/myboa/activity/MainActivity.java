@@ -16,6 +16,9 @@ import android.widget.TimePicker;
 
 import com.bigkoo.pickerview.view.TimePickerView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import es.dmoral.toasty.Toasty;
 import me.majiajie.pagerbottomtabstrip.NavigationController;
 import me.majiajie.pagerbottomtabstrip.PageNavigationView;
@@ -40,6 +43,7 @@ public class MainActivity extends FragmentActivity {
     FragmentManager mFragmentManager;
     NavigationController mNavigationController;
     private static final int RESULT_CODE_ADDRECORD = 923;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,6 +127,7 @@ public class MainActivity extends FragmentActivity {
         }
     }
 
+
     private void initUI(){
         mMoneyFragment = new MoneyFragment();
         mTableFragment = new TableFragment();
@@ -145,25 +150,19 @@ public class MainActivity extends FragmentActivity {
 
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mNavigationController.setSelect(0);
-    }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         switch (requestCode){
             case RESULT_CODE_ADDRECORD:
-                Log.d("123","走到了");
                 Record record = null;
                 if (data != null) {
                     record = (Record)data.getSerializableExtra("data");
                     Toasty.success(this,record.toString()).show();
-                    /*mTableFragment.setTestTV(record.toString());*/
                     mTableFragment.upDate(record);
                     mMoneyFragment.upDate(record);
-                    //todo 存到SP，从SP拿，鲁棒性，界面优化，网络存储
                 }
 
                 break;

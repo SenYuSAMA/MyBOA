@@ -146,7 +146,7 @@ public class OweFragment extends Fragment {
             mDatas.add(baitiao);
             mDatas.add(bank);
             mDatas.add(bill);
-
+            SPUtils.saveOweToSP(mDatas,getActivity());
         }
     }
 

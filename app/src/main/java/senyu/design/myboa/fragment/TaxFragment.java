@@ -14,7 +14,7 @@ import senyu.design.myboa.R;
  * A simple {@link Fragment} subclass.
  */
 public class TaxFragment extends Fragment {
-
+    //todo 搞定个税界面及逻辑
 
     public TaxFragment() {
         // Required empty public constructor

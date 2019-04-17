@@ -78,16 +78,16 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         mBuilder = new TimePickerBuilder(this, new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日hh时");
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日hh时mm分");
                     String text = simpleDateFormat.format(date);
-                    mRecord.setDate(text);
+                    mRecord.setDate(date);
                     mDateTV.setText(text);
             }
         });
         mTimePickerView = mBuilder.setCancelText("取消")
                 .setSubmitText("确认")
                 .setLabel("年","月","日","时","分","秒")
-                .setType(new boolean[]{true,true,true,true,false,false})
+                .setType(new boolean[]{true,true,true,true,true,false})
                 .build();
         mTimePickerView.show();
     }
@@ -135,6 +135,9 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         mThreeList.add(getString(R.string.eat));
         mThreeList.add(getString(R.string.drink));
         mThreeList.add("工资");
+        mThreeList.add("捡到/丢失");
+        mThreeList.add("住房");
+        mThreeList.add("交通");
         mThreeList.add("捡到/丢失");
 
         OptionsPickerView pvNoLinkOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {

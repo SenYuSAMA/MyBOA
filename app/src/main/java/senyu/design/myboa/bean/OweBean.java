@@ -1,6 +1,5 @@
 package senyu.design.myboa.bean;
 
-import com.contrarywind.interfaces.IPickerViewData;
 
 public class OweBean extends FinanceBean{
 

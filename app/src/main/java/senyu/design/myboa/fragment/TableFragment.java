@@ -17,6 +17,8 @@ import senyu.design.myboa.R;
 import senyu.design.myboa.adapter.OweRecyclerViewAdapter;
 import senyu.design.myboa.adapter.TableAdapter;
 import senyu.design.myboa.bean.Record;
+import senyu.design.myboa.utils.DateUtils;
+import senyu.design.myboa.utils.SPUtils;
 
 
 /**
@@ -48,12 +50,17 @@ public class TableFragment extends Fragment {
     }
 
     private void initData() {
-        mDatas = new ArrayList<>();
-        mDatas.add(new Record(5.43,"2014 15 15","蚂蚁华北","吃",true));
+        if(SPUtils.getRecordFromSP(getActivity(),SPUtils.RECORD,"")!=null) {
+            mDatas = SPUtils.getRecordFromSP(getActivity(), SPUtils.RECORD, "");
+        }else{
+            mDatas = new ArrayList<>();
+        }
     }
 
     public void upDate(Record data){
         mDatas.add(data);
+        DateUtils.sortByDate(mDatas);
+        SPUtils.saveRecordToSP(mDatas,getActivity());
         mAdapter.notifyDataSetChanged();
     }
 }

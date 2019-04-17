@@ -140,6 +140,7 @@ public class BalanceFragment extends Fragment {
             mDatas.add(lent);
             mDatas.add(wechat);
             mDatas.add(alipay);
+            SPUtils.saveBeantoSP(mDatas,getActivity());
         }
     }
 

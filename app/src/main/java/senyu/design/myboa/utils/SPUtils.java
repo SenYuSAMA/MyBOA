@@ -14,6 +14,7 @@ import com.google.gson.reflect.TypeToken;
 import senyu.design.myboa.bean.BalanceBean;
 import senyu.design.myboa.bean.FinanceBean;
 import senyu.design.myboa.bean.OweBean;
+import senyu.design.myboa.bean.Record;
 
 public class SPUtils
 {
@@ -201,6 +202,7 @@ public class SPUtils
     public static final String FIRST_COME = "first_come";
     public static final String BALANCE_BEAN_KEY = "BalanceBean";
     public static final String OWE_BEAN_KEY = "OweBean";
+    public static final String RECORD = "Record";
 
 public static boolean  saveBeantoSP(List<BalanceBean> datas,Context context){
         Gson gson = new Gson();
@@ -247,5 +249,22 @@ public static boolean  saveBeantoSP(List<BalanceBean> datas,Context context){
         }
             return  result;
         }
+
+    public static List<Record> getRecordFromSP(Context context,String key,String defaultStr){
+        String jsonStr = (String)get(context,key,defaultStr);
+        if(jsonStr != null){
+            Gson gson = new Gson();
+            List<Record> datas = gson.fromJson(jsonStr,new TypeToken<List<Record>>(){}.getType());
+            return datas;
+        }
+        return null;
+    }
+
+    public static boolean  saveRecordToSP(List<Record> datas, Context context){
+        Gson gson = new Gson();
+        String jsonStr = gson.toJson(datas);
+        put(context,RECORD,jsonStr);
+        return true;
+    }
 
 }

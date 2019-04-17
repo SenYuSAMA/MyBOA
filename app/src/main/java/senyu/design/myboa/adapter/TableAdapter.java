@@ -6,6 +6,7 @@ import android.content.Context;
 import com.chad.library.adapter.base.BaseItemDraggableAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import senyu.design.myboa.R;
@@ -33,7 +34,9 @@ public class TableAdapter extends BaseItemDraggableAdapter<Record, BaseViewHolde
             helper.setTextColor(R.id.cost_tv,mContext.getResources().getColor(R.color.pig_color_1));
         }
 
-        helper.setText(R.id.time_tv,item.getDate())
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日hh时mm分");
+        String text = simpleDateFormat.format(item.getDate());
+        helper.setText(R.id.time_tv,text)
                 .setText(R.id.by_title_tv,item.getByTitle())
                 .setText(R.id.usage_tv,item.getUsage());
 
