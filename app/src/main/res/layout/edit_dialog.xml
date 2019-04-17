@@ -4,14 +4,14 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="2dp"
+    android:padding="@dimen/dp_2"
     >
 
     <TextView
         android:layout_centerHorizontal="true"
         android:id="@+id/edit_title"
-        android:layout_marginTop="50dp"
-        android:textSize="20sp"
+        android:layout_marginTop="@dimen/dp_50"
+        android:textSize="@dimen/sp_20"
         android:textColor="@color/selectedBlue"
         android:layout_gravity="center_vertical"
         android:layout_width="wrap_content"
@@ -24,7 +24,7 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/edit_title"
         android:layout_gravity="center"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="@dimen/dp_18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"

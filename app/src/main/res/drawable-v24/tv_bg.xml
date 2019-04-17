@@ -5,15 +5,15 @@
     <solid android:color="@android:color/white"/>
     <!-- 边框 -->
     <stroke
-        android:width="3dp"
+        android:width="@dimen/dp_3"
         android:color="@color/orange"/>
     <!-- 圆角 -->
-    <corners android:radius="60dp"/>
+    <corners android:radius="@dimen/dp_60"/>
     <!-- 边距 -->
     <padding
-        android:top="2dp"
-        android:bottom="2dp"
-        android:left="6dp"
-        android:right="6dp"/>
+        android:top="@dimen/dp_2"
+        android:bottom="@dimen/dp_2"
+        android:left="@dimen/dp_6"
+        android:right="@dimen/dp_6"/>
 
 </shape>

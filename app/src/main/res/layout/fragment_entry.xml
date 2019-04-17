@@ -10,10 +10,10 @@
 
     <Button
         android:id="@+id/btn_entry"
-        android:layout_width="160dp"
+        android:layout_width="@dimen/dp_160"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|bottom"
-        android:layout_marginBottom="120dp"
+        android:layout_marginBottom="@dimen/dp_120"
         android:text="@string/entry"/>
 
 </FrameLayout>

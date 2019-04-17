@@ -7,13 +7,13 @@
 
     <!-- 边框的颜色和粗细 -->
     <stroke
-        android:width="10dp"
+        android:width="@dimen/dp_10"
         android:color="@color/pig_color_2"
         />
 
     <!-- android:radius 圆角的半径 -->
     <corners
-        android:radius="10dp"
+        android:radius="@dimen/dp_10"
         />
 
 </shape>

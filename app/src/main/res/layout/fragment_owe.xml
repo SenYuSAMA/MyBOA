@@ -8,29 +8,29 @@
         android:id="@+id/total_count"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
+        android:paddingLeft="@dimen/dp_5"
+        android:paddingRight="@dimen/dp_5"
         android:background="@drawable/total_bg"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
         >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="@dimen/dp_10"
             android:text="@string/total_owe"
             android:textColor="@color/seaMeatWhite"
-            android:textSize="18sp" />
+            android:textSize="@dimen/sp_18" />
 
         <TextView
             android:id="@+id/amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/zero"
-            android:textSize="15sp"
-            android:paddingEnd="10dp"
+            android:textSize="@dimen/sp_15"
+            android:paddingEnd="@dimen/dp_10"
             android:textColor="@color/seaMeatWhite"
             android:layout_alignParentEnd="true"
             android:layout_centerInParent="true"
