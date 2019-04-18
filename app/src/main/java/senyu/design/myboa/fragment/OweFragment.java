@@ -217,6 +217,7 @@ public class OweFragment extends Fragment {
     public void update(int j, double cost, boolean plusOrNot) {
         mDatas.get(j).computerAmount(cost,plusOrNot);
         adapter.notifyDataSetChanged();
+        SPUtils.saveOweToSP(mDatas,getActivity());
         countTotal();
     }
 }

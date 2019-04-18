@@ -219,6 +219,7 @@ public class BalanceFragment extends Fragment {
     public void update(int i, double cost, boolean plusOrNot) {
             mDatas.get(i).computerAmount(cost,plusOrNot);
             adapter.notifyDataSetChanged();
+            SPUtils.saveBeantoSP(mDatas,getActivity());
             countTotal();
     }
 }

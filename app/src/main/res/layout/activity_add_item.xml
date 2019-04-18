@@ -141,7 +141,7 @@
 
         <LinearLayout
             android:id="@+id/wechat_ll"
-            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_5"
             android:background="@color/white"
             android:layout_below="@id/lent_ll"
             android:layout_width="match_parent"

@@ -1,15 +1,213 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/gray_8f"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.TaxFragment">
+>
 
-      <ImageView
-      android:layout_marginStart="@dimen/dp_20"
-      android:layout_marginEnd="@dimen/dp_20"
-      android:src="@drawable/tax_bar"
-      android:layout_width="@dimen/dp_600"
-      android:layout_height="@dimen/dp_150" />
+
+    <ImageView
+        android:id="@+id/pic_iv"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginStart="@dimen/dp_20"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:src="@drawable/tax_bar"
+        android:layout_width="@dimen/dp_600"
+        android:layout_height="@dimen/dp_150" />
+
+    <RelativeLayout
+        android:layout_below="@id/pic_iv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    
+        <TextView
+            android:id="@+id/month_income"
+            android:textSize="@dimen/sp_16"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginStart="@dimen/dp_10"
+            android:text="@string/month_income"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/income_et"
+            android:layout_marginStart="@dimen/dp_30"
+            android:hint="@string/income_hint"
+            android:background="@drawable/tax_et_bg"
+            android:inputType="numberDecimal"
+            android:padding="@dimen/dp_5"
+            android:textSize="@dimen/sp_20"
+            android:layout_below="@id/month_income"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+        android:id="@+id/social_insurance"
+        android:textSize="@dimen/sp_16"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_below="@id/income_et"
+        android:text="@string/insurance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/social_insurance_et"
+            android:layout_marginStart="@dimen/dp_30"
+            android:hint="@string/insurance_hint"
+            android:background="@drawable/tax_et_bg"
+            android:inputType="numberDecimal"
+            android:padding="@dimen/dp_5"
+            android:textSize="@dimen/sp_20"
+            android:layout_below="@id/social_insurance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/house_insurance"
+            android:textSize="@dimen/sp_16"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_below="@id/social_insurance_et"
+            android:text="@string/house_insurance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/house_insurance_et"
+            android:layout_marginStart="@dimen/dp_30"
+            android:hint="@string/house_insurance_hint"
+            android:background="@drawable/tax_et_bg"
+            android:inputType="numberDecimal"
+            android:padding="@dimen/dp_5"
+            android:textSize="@dimen/sp_20"
+            android:layout_below="@id/house_insurance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/son_education"
+            android:textSize="@dimen/sp_16"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_below="@id/house_insurance_et"
+            android:text="@string/son_education"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/son_education_et"
+            android:layout_marginStart="@dimen/dp_30"
+            android:hint="@string/son_education_hint"
+            android:background="@drawable/tax_et_bg"
+            android:inputType="numberDecimal"
+            android:padding="@dimen/dp_5"
+            android:textSize="@dimen/sp_20"
+            android:layout_below="@id/son_education"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/self_education"
+            android:text="@string/self_education"
+            android:layout_below="@id/son_education_et"
+
+            android:textSize="@dimen/sp_16"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/self_education_et"
+            android:hint="@string/self_education_hint"
+            android:layout_below="@id/self_education"
+            android:background="@drawable/tax_et_bg"
+            android:inputType="numberDecimal"
+            android:padding="@dimen/dp_5"
+            android:layout_marginStart="@dimen/dp_30"
+            android:textSize="@dimen/sp_20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/house_rent"
+            android:text="@string/house_rent"
+            android:layout_below="@id/self_education_et"
+            android:textSize="@dimen/sp_16"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/house_rent_et"
+            android:hint="@string/house_rent_hint"
+            android:layout_below="@id/house_rent"
+            android:background="@drawable/tax_et_bg"
+            android:inputType="numberDecimal"
+            android:padding="@dimen/dp_5"
+            android:layout_marginStart="@dimen/dp_30"
+            android:textSize="@dimen/sp_20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/raise_old"
+            android:text="@string/raise_old"
+            android:layout_below="@id/house_rent_et"
+            android:textSize="@dimen/sp_16"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/raise_old_et"
+            android:hint="@string/raise_old_hint"
+            android:layout_below="@id/raise_old"
+            android:background="@drawable/tax_et_bg"
+            android:inputType="numberDecimal"
+            android:padding="@dimen/dp_5"
+            android:layout_marginStart="@dimen/dp_30"
+            android:textSize="@dimen/sp_20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:id="@+id/btn_ll"
+            android:layout_marginTop="@dimen/dp_30"
+            android:layout_below="@id/raise_old_et"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_20"
+            >
+            <Button
+                android:id="@+id/computer_btn"
+                android:background="@drawable/tax_et_bg"
+                android:layout_gravity="start"
+                android:text="@string/computer"
+                android:layout_marginStart="@dimen/dp_50"
+                android:layout_marginEnd="@dimen/dp_50"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/reset"
+                android:background="@drawable/tax_et_bg"
+                android:layout_gravity="end"
+                android:text="@string/reset"
+                android:layout_marginEnd="@dimen/dp_50"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/result_tv"
+            android:layout_below="@id/btn_ll"
+            android:text="这里将会显示结果，如"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </RelativeLayout>
+
+</RelativeLayout>
+    </ScrollView>

@@ -46,4 +46,20 @@
     <string name="income">收入</string>
     <string name="eat">吃</string>
     <string name="drink">喝</string>
+    <string name="month_income">月收入</string>
+    <string name="income_hint">请输入薪酬（月）</string>
+    <string name="insurance">社保扣除额度</string>
+    <string name="insurance_hint">请输入社保扣除额(月)</string>
+    <string name="house_insurance_hint">请输入公积金费用（月）</string>
+    <string name="son_education">子女教育</string>
+    <string name="son_education_hint">请输入子女教育额度（月）</string>
+    <string name="self_education">继续教育</string>
+    <string name="self_education_hint">请输入继续教育额度（月）</string>
+    <string name="house_rent">房贷（房租）</string>
+    <string name="house_rent_hint">请输入房贷或房租（月）</string>
+    <string name="raise_old">赡养老人</string>
+    <string name="raise_old_hint">请输入赡养老人额度（月）</string>
+    <string name="house_insurance">住房公积金</string>
+    <string name="computer">计算</string>
+    <string name="reset">重置</string>
 </resources>
