@@ -1,4 +1,5 @@
 package senyu.design.myboa.fragment;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Bundle;
@@ -26,13 +27,16 @@ import senyu.design.myboa.bean.BalanceBean;
 import senyu.design.myboa.utils.SPUtils;
 
 public class BalanceFragment extends Fragment {
+    public interface UpdateBalance{
+        public void updateBalacne(Double data);
+    }
 
+    private UpdateBalance updateBalance;
     private RecyclerView recyclerView;
     private List<BalanceBean> mDatas;
     private MoneyRecyclerViewAdapter adapter;
     private TextView totalCountTV;
     public BalanceFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -41,7 +45,7 @@ public class BalanceFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_balance, container, false);
         recyclerView = view.findViewById(R.id.balance_rcv);
         totalCountTV = view.findViewById(R.id.amount);
-        String countText = (String) SPUtils.get(getActivity(),"totalBalance","0.0");
+        String countText = (String) SPUtils.get(getActivity(),SPUtils.TOTAL_BALANCE,"0.0");
         totalCountTV.setText(countText);
         initData();
         //初始化adapter和recyclerview
@@ -118,6 +122,16 @@ public class BalanceFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            updateBalance = (UpdateBalance) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement onOkButtonPressed");
+        }
+
+    }
 
     /**
      * 从本地初始化数据
@@ -209,7 +223,8 @@ public class BalanceFragment extends Fragment {
             count+= mDatas.get(i).getAmount();
         }
         totalCountTV.setText(String.valueOf(count));
-        SPUtils.put(getActivity(),"totalBalance",count);
+        SPUtils.put(getActivity(),SPUtils.TOTAL_BALANCE,count);
+        updateBalance.updateBalacne(count);
     }
 
     public List<BalanceBean> getmDatas() {

@@ -37,7 +37,6 @@ public class TableFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        //todo 完善本fragment的界面，并且拿到数据展示
         View view =inflater.inflate(R.layout.fragment_table, container, false);
         mRecyclerView = view.findViewById(R.id.table_recyclerview);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());

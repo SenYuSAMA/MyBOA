@@ -200,4 +200,10 @@
     <color name="color_50_14">#FFF8E1</color>
     <color name="color_50_15">#FFF3E0</color>
     <color name="color_50_16">#FBE9E7</color>
+
+    <!-- more -->
+    <color name="more_bg">#F7F7F7</color>
+    <color name="more_login">#655F5F</color>
+    <color name="more_login_tips">#A29E9E</color>
+    <color name="line_color">#E7E7E7</color>
 </resources>

@@ -62,4 +62,9 @@
     <string name="house_insurance">住房公积金</string>
     <string name="computer">计算</string>
     <string name="reset">重置</string>
+    <string name="login">立即登录</string>
+    <string name="tips">登陆后可以备份数据到服务器哦！</string>
+    <string name="update">数据上传</string>
+    <string name="download">数据同步</string>
+    <string name="about_me">关于我</string>
 </resources>

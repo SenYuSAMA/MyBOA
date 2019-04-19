@@ -24,7 +24,6 @@ import senyu.design.myboa.utils.TaxUtils;
  * A simple {@link Fragment} subclass.
  */
 public class TaxFragment extends Fragment implements View.OnClickListener {
-    //todo 搞定个税界面及逻辑
     private EditText incomeET;
     private EditText insuranceET;
     private EditText houseET;

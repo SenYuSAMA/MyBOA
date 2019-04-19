@@ -76,9 +76,9 @@ public class OweBean extends FinanceBean{
 
     public double computerAmount(double cost, boolean plusOrNot) {
         if(plusOrNot){
-            amount += cost;
-        }else{
             amount -= cost;
+        }else{
+            amount += cost;
         }
         return amount;
     }

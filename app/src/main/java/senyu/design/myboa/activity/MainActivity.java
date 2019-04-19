@@ -27,13 +27,15 @@ import me.majiajie.pagerbottomtabstrip.listener.SimpleTabItemSelectedListener;
 import senyu.design.myboa.R;
 import senyu.design.myboa.bean.Record;
 import senyu.design.myboa.fragment.AddFragment;
+import senyu.design.myboa.fragment.BalanceFragment;
 import senyu.design.myboa.fragment.MoneyFragment;
 import senyu.design.myboa.fragment.MoreFragment;
+import senyu.design.myboa.fragment.OweFragment;
 import senyu.design.myboa.fragment.TableFragment;
 import senyu.design.myboa.fragment.TaxFragment;
 import senyu.design.myboa.utils.SPUtils;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity implements OweFragment.UpdateOwe, BalanceFragment.UpdateBalance {
     PageNavigationView tab;
     MoneyFragment mMoneyFragment;
     TableFragment mTableFragment;
@@ -169,5 +171,16 @@ public class MainActivity extends FragmentActivity {
 
                 default:break;
         }
+    }
+
+
+    @Override
+    public void updateBalacne(Double data) {
+            mMoreFragment.updateBalance(data);
+    }
+
+    @Override
+    public void updateOwe(Double data) {
+            mMoreFragment.updateOwe(data);
     }
 }

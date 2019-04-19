@@ -1,6 +1,7 @@
 package senyu.design.myboa.fragment;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Bundle;
@@ -34,8 +35,11 @@ import senyu.design.myboa.utils.SPUtils;
  */
 public class OweFragment extends Fragment {
 
+    public interface UpdateOwe{
+        public void updateOwe(Double data);
+    }
 
-
+    private UpdateOwe updateOwe;
     private RecyclerView recyclerView;
     private List<OweBean> mDatas;
     private OweRecyclerViewAdapter adapter;
@@ -51,7 +55,7 @@ public class OweFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_owe, container, false);
         recyclerView = view.findViewById(R.id.owe_rv);
         totaloweTV = view.findViewById(R.id.amount);
-        String countText = (String) SPUtils.get(getActivity(),"totalOwe","0.0");
+        String countText = (String) SPUtils.get(getActivity(),SPUtils.TOTAL_OWE,"0.0");
         totaloweTV.setText(countText);
         initData();
         //初始化adapter和recyclerview
@@ -133,6 +137,7 @@ public class OweFragment extends Fragment {
      * 从本地初始化数据
      * */
     private void initData(){
+
         if(SPUtils.getBeanFromSP(getActivity(),SPUtils.OWE_BEAN_KEY,"") != null){
             mDatas =  SPUtils.getOweFromSP(getActivity(),SPUtils.OWE_BEAN_KEY,"");
         }
@@ -195,6 +200,17 @@ public class OweFragment extends Fragment {
             default:break;
         }
     }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            updateOwe = (UpdateOwe) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement onOkButtonPressed");
+        }
+    }
+
     public  void noticeAndSave(){
         adapter.notifyDataSetChanged();
         countTotal();
@@ -206,7 +222,8 @@ public class OweFragment extends Fragment {
             count+= mDatas.get(i).getAmount();
         }
         totaloweTV.setText(String.valueOf(count));
-        SPUtils.put(getActivity(),"totalOwe",count);
+        SPUtils.put(getActivity(),SPUtils.TOTAL_OWE,count);
+        updateOwe.updateOwe(count);
     }
 
     public List<OweBean> getmDatas() {
