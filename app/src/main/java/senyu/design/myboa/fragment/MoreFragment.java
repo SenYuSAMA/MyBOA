@@ -1,13 +1,16 @@
 package senyu.design.myboa.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import senyu.design.myboa.R;
+import senyu.design.myboa.activity.AboutMeActivity;
 import senyu.design.myboa.utils.SPUtils;
 
 
@@ -17,18 +20,12 @@ import senyu.design.myboa.utils.SPUtils;
 public class MoreFragment extends Fragment {
     private TextView mOweTV;
     private TextView mBalanceTV;
-    private String owe;
-    private String balance;
+    private RelativeLayout mAboutMeRL;
 
 
-    @SuppressLint("ValidFragment")
-    public MoreFragment(String owe, String balance) {
-        this.owe = owe;
-        this.balance = balance;
-    }
 
     public MoreFragment(){
-        this("0","0");
+
     }
 
     @Override
@@ -58,6 +55,14 @@ public class MoreFragment extends Fragment {
             SPUtils.put(getActivity(),SPUtils.TOTAL_BALANCE,balanceStr);
             mBalanceTV.setText(balanceStr);
         }
+        mAboutMeRL = view.findViewById(R.id.about_me_rl);
+        mAboutMeRL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AboutMeActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void updateBalance(Double data) {

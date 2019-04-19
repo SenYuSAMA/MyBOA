@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:theme,android:icon">
-        <activity android:name=".activity.AddRecordActivity"></activity>
+        <activity android:name=".activity.AboutMeActivity"></activity>
+        <activity android:name=".activity.AddRecordActivity" />
         <activity android:name=".activity.AddItemActivity" />
         <activity android:name=".activity.GuideActivity" />
         <activity android:name=".activity.MainActivity">

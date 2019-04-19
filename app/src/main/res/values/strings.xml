@@ -67,4 +67,9 @@
     <string name="update">数据上传</string>
     <string name="download">数据同步</string>
     <string name="about_me">关于我</string>
+    <string name="name">姓名：刘森宇</string>
+    <string name="phone">电话：18520047192</string>
+    <string name="teacher">指导老师：韦老师</string>
+    <string name="class_room">计科5班</string>
+    <string name="github_id_senyusama">github ID :SenYusama</string>
 </resources>

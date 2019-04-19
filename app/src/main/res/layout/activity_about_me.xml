@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:background="@color/color_50_5"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.AboutMeActivity">
+<TextView
+    android:textSize="@dimen/sp_30"
+    android:layout_marginTop="@dimen/dp_40"
+    android:drawableStart="@drawable/name_drawable"
+    android:layout_centerHorizontal="true"
+    android:id="@+id/name_tv"
+    android:text="@string/name"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/phone_tv"
+        android:layout_below="@id/name_tv"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_40"
+        android:drawableStart="@drawable/phone_drawble"
+        android:text="@string/phone"
+        android:textSize="@dimen/sp_25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/class_tv"
+        android:layout_below="@id/phone_tv"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_40"
+        android:drawableStart="@drawable/class_drawble"
+        android:text="@string/class_room"
+        android:textSize="@dimen/sp_30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/teacher_tv"
+        android:layout_below="@id/class_tv"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_40"
+        android:drawableStart="@drawable/teacher_drawble"
+        android:text="@string/teacher"
+        android:textSize="@dimen/sp_30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/github_tv"
+        android:layout_below="@id/teacher_tv"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_40"
+        android:drawableStart="@drawable/github_drawble"
+        android:text="@string/github_id_senyusama"
+        android:textSize="@dimen/sp_30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:layout_below="@id/github_tv"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/pig"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>
