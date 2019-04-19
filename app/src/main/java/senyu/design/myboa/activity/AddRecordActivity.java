@@ -78,7 +78,7 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         mBuilder = new TimePickerBuilder(this, new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日hh时mm分");
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日HH时mm分");
                     String text = simpleDateFormat.format(date);
                     mRecord.setDate(date);
                     mDateTV.setText(text);
