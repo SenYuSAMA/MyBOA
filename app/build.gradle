@@ -42,4 +42,6 @@ dependencies {
     //选择器
     implementation 'com.contrarywind:Android-PickerView:4.1.7'
     implementation 'com.android.support:cardview-v7:28.0.0'
+    //表格框架
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

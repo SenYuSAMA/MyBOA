@@ -78,7 +78,7 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         mBuilder = new TimePickerBuilder(this, new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日HH时mm分");
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日");
                     String text = simpleDateFormat.format(date);
                     mRecord.setDate(date);
                     mDateTV.setText(text);
@@ -87,7 +87,7 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         mTimePickerView = mBuilder.setCancelText("取消")
                 .setSubmitText("确认")
                 .setLabel("年","月","日","时","分","秒")
-                .setType(new boolean[]{true,true,true,true,true,false})
+                .setType(new boolean[]{true,true,true,false,false,false})
                 .build();
         mTimePickerView.show();
     }

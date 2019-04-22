@@ -16,4 +16,13 @@ public class DateUtils {
             }
         });
     }
+
+  /*  public static String[] getXAxis(List<Record> datas){
+        return null;
+    }
+
+    public static float getYAxis(){
+
+    }
+*/
 }

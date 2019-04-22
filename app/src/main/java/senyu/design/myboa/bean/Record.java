@@ -2,6 +2,7 @@ package senyu.design.myboa.bean;
 
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Record implements Serializable {
@@ -68,4 +69,11 @@ public String getByTitle() {
     public String toString() {
         return date + String.valueOf(cost) + byTitle + usage + plusOrNot;
     }
+
+    public String getDateString(){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日");
+        String result = simpleDateFormat.format(date);
+        return result.substring(5,11);
+    }
+    
 }

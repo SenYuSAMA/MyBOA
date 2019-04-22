@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.TableFragment">
-<!--todo 在这上方加bar或者是table chart等东西-->
+
+  <com.github.mikephil.charting.charts.LineChart
+      android:id="@+id/line_chart"
+      android:layout_marginStart="@dimen/dp_5"
+      android:layout_marginEnd="@dimen/dp_5"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/dp_180"/>
+
   <android.support.v7.widget.RecyclerView
+      android:layout_below="@id/line_chart"
       android:id="@+id/table_recyclerview"
       android:layout_width="match_parent"
       android:layout_height="match_parent">
 
   </android.support.v7.widget.RecyclerView>
 
-</FrameLayout>
+</RelativeLayout>
