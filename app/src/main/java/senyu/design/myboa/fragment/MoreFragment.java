@@ -4,25 +4,48 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.List;
+
+import es.dmoral.toasty.Toasty;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 import senyu.design.myboa.R;
 import senyu.design.myboa.activity.AboutMeActivity;
+import senyu.design.myboa.activity.LoginActivity;
+import senyu.design.myboa.bean.BalanceBean;
+import senyu.design.myboa.bean.OweBean;
+import senyu.design.myboa.bean.Record;
+import senyu.design.myboa.utils.HttpUtil;
+import senyu.design.myboa.utils.JSONUtil;
 import senyu.design.myboa.utils.SPUtils;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MoreFragment extends Fragment {
+public class MoreFragment extends Fragment implements View.OnClickListener {
+    private static final String URL_DOWN_BALANCE = "http://47.100.206.82:8080/MyBOA/BalanceServlet?username=l1usy";
+    private static final String URL_DOWN_OWE = "http://47.100.206.82:8080/MyBOA/OweServlet?username=l1usy";
+    private static final String URL_DOWN_RECORD = "http://47.100.206.82:8080/MyBOA/RecordServlet?username=l1usy";
+    public static final int RESULT_LOGIN_CODE = 41;
+
     private TextView mOweTV;
     private TextView mBalanceTV;
     private RelativeLayout mAboutMeRL;
-
-
+    private RelativeLayout mDownloadRL;
+    private RelativeLayout mLoginRl;
+    private TextView mLoginTV;
+    private TextView mLoginTipsTV;
 
     public MoreFragment(){
 
@@ -30,10 +53,22 @@ public class MoreFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_more, container, false);
         bindViews(view);
+        initState();
         return view;
+    }
+
+    private void initState(){
+        if((boolean)SPUtils.get(getActivity(),"isLogin",false)){
+            //如果是登录状态，就要隐藏tips，显示用户名
+            mLoginTV.setText((String)SPUtils.get(getActivity(),"username",""));
+            mLoginTipsTV.setVisibility(View.INVISIBLE);
+        }else{
+            mLoginTV.setText("立即登录");
+            mLoginTipsTV.setVisibility(View.VISIBLE);
+        }
     }
 
     private void bindViews(View view) {
@@ -56,13 +91,13 @@ public class MoreFragment extends Fragment {
             mBalanceTV.setText(balanceStr);
         }
         mAboutMeRL = view.findViewById(R.id.about_me_rl);
-        mAboutMeRL.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), AboutMeActivity.class);
-                startActivity(intent);
-            }
-        });
+        mAboutMeRL.setOnClickListener(this);
+        mDownloadRL = view.findViewById(R.id.download_rl);
+        mDownloadRL.setOnClickListener(this);
+        mLoginRl = view.findViewById(R.id.login_rl);
+        mLoginRl.setOnClickListener(this);
+        mLoginTV = view.findViewById(R.id.login_tv);
+        mLoginTipsTV = view.findViewById(R.id.login_tips);
     }
 
     public void updateBalance(Double data) {
@@ -71,5 +106,68 @@ public class MoreFragment extends Fragment {
 
     public void updateOwe(Double data) {
         mOweTV.setText(data.toString());
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.about_me_rl:
+                final Intent intent = new Intent(getActivity(), AboutMeActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.download_rl:
+                HttpUtil.sendOkHttpRequest(URL_DOWN_RECORD, new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toasty.error(getActivity(),"获取信息失败，请重试").show();
+                            }
+                        });
+                    }
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        final List<Record> datas = JSONUtil.parseRecordJSON(response.body().string());
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+                                String text = sdf.format(datas.get(0).getDate());
+                                Toasty.success(getActivity(), text + datas.get(0).isPlusOrNot()).show();
+                            }
+                        });
+                    }
+                });
+                break;
+            case R.id.login_rl:
+                Intent intent1 = new Intent(getActivity(), LoginActivity.class);
+                startActivityForResult(intent1,RESULT_LOGIN_CODE);
+                break;
+            default:break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case RESULT_LOGIN_CODE:
+                if(data!=null) {
+                    String username = data.getStringExtra("username");
+                    if (username != null && username.length() != 0) {
+                        mLoginTV.setText(username);
+                        mLoginTipsTV.setVisibility(View.INVISIBLE);
+                    }
+                }
+                break;
+            default:break;
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initState();
     }
 }

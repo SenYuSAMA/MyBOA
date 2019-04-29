@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/color_50_10"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.LoginActivity">
+
+        <ImageView
+            android:id="@+id/top_img"
+            android:layout_marginTop="@dimen/dp_100"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/login_top"
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="@dimen/dp_150" />
+
+        <LinearLayout
+            android:id="@+id/et_ll"
+            android:layout_below="@id/top_img"
+            android:layout_marginTop="@dimen/dp_50"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <EditText
+                android:id="@+id/username_et"
+                android:background="@drawable/bg_edittext_selector"
+                android:drawableStart="@drawable/username"
+                android:drawablePadding="@dimen/dp_8"
+                android:layout_gravity="center"
+                android:textSize="@dimen/sp_18"
+                android:hint="请输入用户名"
+                android:singleLine="true"
+                android:layout_width="@dimen/dp_200"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/password_et"
+                android:background="@drawable/bg_edittext_selector"
+                android:layout_marginTop="@dimen/dp_10"
+                android:drawableStart="@drawable/password"
+                android:drawablePadding="@dimen/dp_5"
+                android:layout_gravity="center"
+                android:textSize="@dimen/sp_18"
+                android:singleLine="true"
+                android:inputType="textPassword"
+                android:hint="请输入密码"
+                android:layout_width="@dimen/dp_200"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <Button
+            android:background="@drawable/cash_bg"
+            android:id="@+id/login_btn"
+            android:layout_marginTop="@dimen/dp_25"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/et_ll"
+            android:text="登录"
+            android:textSize="@dimen/sp_18"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/register_tv"
+        android:layout_marginTop="@dimen/dp_15"
+        android:layout_below="@id/login_btn"
+        android:layout_centerInParent="true"
+        android:text="没有帐号？注册一个"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:layout_marginStart="@dimen/dp_20"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:id="@+id/sign_out_rl"
+        android:background="@drawable/sign_out_bg"
+        android:layout_marginTop="@dimen/dp_35"
+        android:layout_below="@id/register_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        >
+        <TextView
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_25"
+            android:layout_margin="@dimen/dp_10"
+            android:text="@string/sign_out"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+</RelativeLayout>

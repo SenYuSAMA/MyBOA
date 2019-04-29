@@ -157,6 +157,7 @@ public class MainActivity extends FragmentActivity implements OweFragment.Update
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode){
             case RESULT_CODE_ADDRECORD:
                 Record record = null;
