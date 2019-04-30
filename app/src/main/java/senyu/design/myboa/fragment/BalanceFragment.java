@@ -48,6 +48,88 @@ public class BalanceFragment extends Fragment {
         countTotal();
     }
 
+    public void refreshUI() {
+        initRecyclerView();
+    }
+
+    private void initRecyclerView(){
+        initData();
+        //初始化adapter和recyclerview
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new MoneyRecyclerViewAdapter(mDatas);
+        ItemDragAndSwipeCallback itemDragAndSwipeCallback = new MyItemDragAndSwipeCallback(adapter);
+        final ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemDragAndSwipeCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+        //注册拖动
+        adapter.enableDragItem(itemTouchHelper, R.id.iv_img, true);
+        //注册滑动
+        adapter.enableSwipeItem();
+        //滑动删除监听
+        adapter.setOnItemSwipeListener(new OnItemSwipeListener() {
+            @Override
+            public void onItemSwipeStart(RecyclerView.ViewHolder viewHolder, int pos) {
+
+            }
+
+            @Override
+            public void clearView(RecyclerView.ViewHolder viewHolder, int pos) {
+
+            }
+
+            @Override
+            public void onItemSwiped(RecyclerView.ViewHolder viewHolder, int pos) {
+                mDatas.remove(pos);
+                adapter.notifyDataSetChanged();
+                countTotal();
+                SPUtils.saveBeantoSP(mDatas, getActivity());
+            }
+
+            @Override
+            public void onItemSwipeMoving(Canvas canvas, RecyclerView.ViewHolder viewHolder, float dX, float dY, boolean isCurrentlyActive) {
+
+            }
+        });
+        //拖动监听
+        final OnItemDragListener onItemDragListener = new OnItemDragListener() {
+            @Override
+            public void onItemDragStart(RecyclerView.ViewHolder viewHolder, int pos) {
+
+            }
+
+            @Override
+            public void onItemDragMoving(RecyclerView.ViewHolder source, int from, RecyclerView.ViewHolder target, int to) {
+
+
+            }
+
+            @Override
+            public void onItemDragEnd(RecyclerView.ViewHolder viewHolder, int pos) {
+                adapter.notifyDataSetChanged();
+                countTotal();
+                SPUtils.saveBeantoSP(mDatas, getActivity());
+            }
+        };
+        adapter.setOnItemDragListener(onItemDragListener);
+        //点击事件
+        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                DialogFragment dialogFragment = new MyEditNumDialog();
+                Bundle bundle = new Bundle();
+                bundle.putDouble("amount", mDatas.get(position).getAmount());
+                bundle.putInt("position", position);
+                dialogFragment.setTargetFragment(BalanceFragment.this, 1);
+                dialogFragment.setArguments(bundle);
+                dialogFragment.show(getFragmentManager(), "dialogfragment");
+                Toasty.info(getActivity(), "请修改金额").show();
+            }
+        });
+        recyclerView.setAdapter(adapter);
+        countTotal();
+    }
+
     public interface UpdateBalance{
         public void updateBalacne(Double data);
     }
@@ -68,78 +150,7 @@ public class BalanceFragment extends Fragment {
         totalCountTV = view.findViewById(R.id.amount);
         String countText = (String) SPUtils.get(getActivity(),SPUtils.TOTAL_BALANCE,"0.0");
         totalCountTV.setText(countText);
-        initData();
-        //初始化adapter和recyclerview
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(layoutManager);
-        adapter = new MoneyRecyclerViewAdapter(mDatas);
-        ItemDragAndSwipeCallback itemDragAndSwipeCallback = new MyItemDragAndSwipeCallback(adapter);
-        final ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemDragAndSwipeCallback);
-        itemTouchHelper.attachToRecyclerView(recyclerView);
-        //注册拖动
-        adapter.enableDragItem(itemTouchHelper,R.id.iv_img,true);
-        //注册滑动
-        adapter.enableSwipeItem();
-        //滑动删除监听
-        adapter.setOnItemSwipeListener(new OnItemSwipeListener() {
-            @Override
-            public void onItemSwipeStart(RecyclerView.ViewHolder viewHolder, int pos) {
-
-            }
-
-            @Override
-            public void clearView(RecyclerView.ViewHolder viewHolder, int pos) {
-
-            }
-
-            @Override
-            public void onItemSwiped(RecyclerView.ViewHolder viewHolder, int pos) {
-                mDatas.remove(pos);
-                adapter.notifyDataSetChanged();
-                countTotal();
-                SPUtils.saveBeantoSP(mDatas,getActivity());
-            }
-
-            @Override
-            public void onItemSwipeMoving(Canvas canvas, RecyclerView.ViewHolder viewHolder, float dX, float dY, boolean isCurrentlyActive) {
-
-            }
-        });
-        //拖动监听
-        final OnItemDragListener onItemDragListener = new OnItemDragListener() {
-            @Override
-            public void onItemDragStart(RecyclerView.ViewHolder viewHolder, int pos){
-
-            }
-            @Override
-            public void onItemDragMoving(RecyclerView.ViewHolder source, int from, RecyclerView.ViewHolder target, int to) {
-
-
-            }
-            @Override
-            public void onItemDragEnd(RecyclerView.ViewHolder viewHolder, int pos) {
-                adapter.notifyDataSetChanged();
-                countTotal();
-                SPUtils.saveBeantoSP(mDatas,getActivity());
-            }
-        };
-        adapter.setOnItemDragListener(onItemDragListener);
-        //点击事件
-        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                DialogFragment dialogFragment = new MyEditNumDialog();
-                Bundle bundle = new Bundle();
-                bundle.putDouble("amount",mDatas.get(position).getAmount());
-                bundle.putInt("position",position);
-                dialogFragment.setTargetFragment(BalanceFragment.this,1);
-                dialogFragment.setArguments(bundle);
-                dialogFragment.show(getFragmentManager(),"dialogfragment");
-                Toasty.info(getActivity(),"请修改金额").show();
-            }
-        });
-        recyclerView.setAdapter(adapter);
+       initRecyclerView();
         return view;
     }
 

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -155,6 +156,13 @@ public class TableFragment extends Fragment {
     public void clearUI() {
         mDatas.clear();
         mAdapter.notifyDataSetChanged();
+        initChart();
+    }
+
+    public void refreshUI() {
+        initData();
+        mAdapter = new TableAdapter(mDatas,getActivity());
+        mRecyclerView.setAdapter(mAdapter);
         initChart();
     }
 }

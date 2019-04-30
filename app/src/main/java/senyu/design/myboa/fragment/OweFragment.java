@@ -52,28 +52,11 @@ public class OweFragment extends Fragment {
         countTotal();
     }
 
-    public interface UpdateOwe{
-        public void updateOwe(Double data);
+    public void refreshUI() {
+        initRecyclerView();
     }
 
-    private UpdateOwe updateOwe;
-    private RecyclerView recyclerView;
-    private List<OweBean> mDatas;
-    private OweRecyclerViewAdapter adapter;
-    private TextView totaloweTV;
-
-    public OweFragment() {
-        // Required empty public constructor
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_owe, container, false);
-        recyclerView = view.findViewById(R.id.owe_rv);
-        totaloweTV = view.findViewById(R.id.amount);
-        String countText = (String) SPUtils.get(getActivity(),SPUtils.TOTAL_OWE,"0.0");
-        totaloweTV.setText(countText);
+    private void initRecyclerView(){
         initData();
         //初始化adapter和recyclerview
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -146,6 +129,32 @@ public class OweFragment extends Fragment {
             }
         });
         recyclerView.setAdapter(adapter);
+        countTotal();
+    }
+
+    public interface UpdateOwe{
+        public void updateOwe(Double data);
+    }
+
+    private UpdateOwe updateOwe;
+    private RecyclerView recyclerView;
+    private List<OweBean> mDatas;
+    private OweRecyclerViewAdapter adapter;
+    private TextView totaloweTV;
+
+    public OweFragment() {
+        // Required empty public constructor
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_owe, container, false);
+        recyclerView = view.findViewById(R.id.owe_rv);
+        totaloweTV = view.findViewById(R.id.amount);
+        String countText = (String) SPUtils.get(getActivity(),SPUtils.TOTAL_OWE,"0.0");
+        totaloweTV.setText(countText);
+        initRecyclerView();
         return view;
     }
 

@@ -157,4 +157,9 @@ public class MoneyFragment extends Fragment {
         mBalanceFragment.clearUI();
         mOweFragment.clearUI();
     }
+
+    public void refreshUI() {
+        mBalanceFragment.refreshUI();
+        mOweFragment.refreshUI();
+    }
 }

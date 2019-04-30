@@ -187,12 +187,12 @@ public class MainActivity extends FragmentActivity implements OweFragment.Update
 
     @Override
     public void refreshUI() {
-
+        mTableFragment.refreshUI();
+        mMoneyFragment.refreshUI();
     }
 
     @Override
     public void clearUI() {
-        Log.d("test0430","MainActivtiy的claerUI");
         mTableFragment.clearUI();
         mMoneyFragment.clearUI();
         mMoreFragment.clearUI();

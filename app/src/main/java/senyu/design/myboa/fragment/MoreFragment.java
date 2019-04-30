@@ -122,29 +122,7 @@ public class MoreFragment extends Fragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.download_rl:
-                HttpUtil.sendOkHttpRequest(URL_DOWN_RECORD, new Callback() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toasty.error(getActivity(),"获取信息失败，请重试").show();
-                            }
-                        });
-                    }
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                        final List<Record> datas = JSONUtil.parseRecordJSON(response.body().string());
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
-                                String text = sdf.format(datas.get(0).getDate());
-                                Toasty.success(getActivity(), text + datas.get(0).isPlusOrNot()).show();
-                            }
-                        });
-                    }
-                });
+               downloadRecord();
                 break;
             case R.id.login_rl:
                 Intent intent1 = new Intent(getActivity(), LoginActivity.class);
@@ -169,7 +147,6 @@ public class MoreFragment extends Fragment implements View.OnClickListener {
                         mLoginTipsTV.setVisibility(View.INVISIBLE);
                     }
                 }else{
-                    Log.d("test0430","进入到要claerUI的逻辑");
                     mRefresher.clearUI();
                 }
                 break;
@@ -202,7 +179,7 @@ public class MoreFragment extends Fragment implements View.OnClickListener {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toasty.success(getActivity(),"消费记录上传完成，准备上传余额记录...").show();
+                        Toasty.info(getActivity(),"消费记录上传完成，准备上传余额记录...").show();
                         uploadBalance();
                     }
                 });
@@ -235,7 +212,7 @@ public class MoreFragment extends Fragment implements View.OnClickListener {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toasty.success(getActivity(),"余额记录上传完成，准备上传欠款记录...").show();
+                        Toasty.info(getActivity(),"余额记录上传完成，准备上传欠款记录...").show();
                         uploadOwe();
                     }
                 });
@@ -292,6 +269,106 @@ public class MoreFragment extends Fragment implements View.OnClickListener {
             throw new ClassCastException(activity.toString() + " must implement OnDataRefresh");
         }
     }
+
+    private void downloadRecord(){
+        String username = (String)SPUtils.get(getActivity(),"username","");
+        if(username==null||username.length()==0){
+            Toasty.error(getActivity(),"请先登录帐号，再进行数据同步").show();
+            return;
+        }
+        String recordUrl = "http://47.100.206.82:8080/MyBOA/RecordServlet?username=";
+        HttpUtil.sendOkHttpRequest(recordUrl + username, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toasty.error(getActivity(),"网络请求出错，请重试").show();
+                    }
+                });
+            }
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                final List<Record> datas = JSONUtil.parseRecordJSON(response.body().string());
+                SPUtils.saveRecordToSP(datas,getActivity());
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toasty.info(getActivity(),"消费记录同步完成，准备同步余额记录...").show();
+                        downloadBalance();
+                    }
+                });
+            }
+        });
+    }
+
+
+    private void downloadBalance(){
+        String username = (String)SPUtils.get(getActivity(),"username","");
+        if(username==null||username.length()==0){
+            Toasty.error(getActivity(),"请先登录帐号，再进行数据同步").show();
+            return;
+        }
+        String balanceUrl = "http://47.100.206.82:8080/MyBOA/BalanceServlet?username=";
+        HttpUtil.sendOkHttpRequest(balanceUrl + username, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toasty.error(getActivity(),"网络请求出错，请重试").show();
+                    }
+                });
+            }
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                final List<BalanceBean> datas = JSONUtil.parseBalanceJSON(response.body().string());
+                SPUtils.saveBeantoSP(datas,getActivity());
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toasty.info(getActivity(),"余额记录同步完成，准备同步欠款记录...").show();
+                        downloadOwe();
+                    }
+                });
+            }
+        });
+    }
+
+
+    public void downloadOwe(){
+        String username = (String)SPUtils.get(getActivity(),"username","");
+        if(username==null||username.length()==0){
+            Toasty.error(getActivity(),"请先登录帐号，再进行数据同步").show();
+            return;
+        }
+        String oweUrl = "http://47.100.206.82:8080/MyBOA/OweServlet?username=";
+        HttpUtil.sendOkHttpRequest(oweUrl + username, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toasty.error(getActivity(),"网络请求出错，请重试").show();
+                    }
+                });
+            }
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                final List<OweBean> datas = JSONUtil.parseOweJSON(response.body().string());
+                SPUtils.saveOweToSP(datas,getActivity());
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toasty.success(getActivity(),"全部记录同步完成，更新界面").show();
+                        mRefresher.refreshUI();
+                    }
+                });
+
+            }
+        });
+    }
+
 
     public void clearUI(){
         mLoginTV.setText("立即登录");
