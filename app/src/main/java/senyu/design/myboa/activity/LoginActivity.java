@@ -87,6 +87,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void signOut() {
         SPUtils.remove(this,"username");
         SPUtils.put(this,"isLogin",false);
+        SPUtils.remove(this,SPUtils.TOTAL_BALANCE);
+        SPUtils.remove(this,SPUtils.TOTAL_OWE);
+        SPUtils.remove(this,SPUtils.OWE_BEAN_KEY);
+        SPUtils.remove(this,SPUtils.RECORD);
+        SPUtils.remove(this,SPUtils.BALANCE_BEAN_KEY);
+        //TODO 通知UI更新的逻辑
+        setResult(MoreFragment.RESULT_LOGIN_CODE,null);
         finish();
     }
 

@@ -27,6 +27,27 @@ import senyu.design.myboa.bean.BalanceBean;
 import senyu.design.myboa.utils.SPUtils;
 
 public class BalanceFragment extends Fragment {
+
+    public void clearUI() {
+        SPUtils.remove(getActivity(),SPUtils.BALANCE_BEAN_KEY);
+        mDatas.clear();
+        BalanceBean cash = new BalanceBean(BalanceBean.ID.CASH, "现金", R.drawable.cash, R.drawable.cash_bg, 0, "剩余现金总额");
+        BalanceBean invest = new BalanceBean(BalanceBean.ID.INVEST, "投资账户", R.drawable.invest, R.drawable.invest_bg, 0, "投资账户上的资金");
+        BalanceBean bank = new BalanceBean(BalanceBean.ID.CREDIT_CARD, "储蓄卡余额", R.drawable.credit_card, R.drawable.credit_card_bg, 0, "储蓄卡余额");
+        BalanceBean lent = new BalanceBean(BalanceBean.ID.LENT, "应收帐", R.drawable.lent, R.drawable.lent_bg, 0, "别人欠我的钱");
+        BalanceBean wechat = new BalanceBean(BalanceBean.ID.WECHAT_PAY, "微信钱包", R.drawable.wechat_icon, R.drawable.wechat_bg, 0, "微信钱包余额");
+        BalanceBean alipay = new BalanceBean(BalanceBean.ID.ALI_PAY, "支付宝", R.drawable.alipay, R.drawable.alipay_bg, 0, "支付宝余额");
+        mDatas.add(cash);
+        mDatas.add(invest);
+        mDatas.add(bank);
+        mDatas.add(lent);
+        mDatas.add(wechat);
+        mDatas.add(alipay);
+        SPUtils.saveBeantoSP(mDatas,getActivity());
+        adapter.notifyDataSetChanged();
+        countTotal();
+    }
+
     public interface UpdateBalance{
         public void updateBalacne(Double data);
     }

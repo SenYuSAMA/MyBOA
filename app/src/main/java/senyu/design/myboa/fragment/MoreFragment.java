@@ -1,6 +1,7 @@
 package senyu.design.myboa.fragment;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -46,6 +47,8 @@ public class MoreFragment extends Fragment implements View.OnClickListener {
     private RelativeLayout mLoginRl;
     private TextView mLoginTV;
     private TextView mLoginTipsTV;
+    private RelativeLayout mUpdateRL;
+    private OnDataRefresh mRefresher;
 
     public MoreFragment(){
 
@@ -66,6 +69,7 @@ public class MoreFragment extends Fragment implements View.OnClickListener {
             mLoginTV.setText((String)SPUtils.get(getActivity(),"username",""));
             mLoginTipsTV.setVisibility(View.INVISIBLE);
         }else{
+            //如果是注销状态，要刷新UI
             mLoginTV.setText("立即登录");
             mLoginTipsTV.setVisibility(View.VISIBLE);
         }
@@ -98,6 +102,8 @@ public class MoreFragment extends Fragment implements View.OnClickListener {
         mLoginRl.setOnClickListener(this);
         mLoginTV = view.findViewById(R.id.login_tv);
         mLoginTipsTV = view.findViewById(R.id.login_tips);
+        mUpdateRL = view.findViewById(R.id.update_rl);
+        mUpdateRL.setOnClickListener(this);
     }
 
     public void updateBalance(Double data) {
@@ -144,6 +150,9 @@ public class MoreFragment extends Fragment implements View.OnClickListener {
                 Intent intent1 = new Intent(getActivity(), LoginActivity.class);
                 startActivityForResult(intent1,RESULT_LOGIN_CODE);
                 break;
+            case R.id.update_rl:
+                uploadRecord();
+                break;
             default:break;
         }
     }
@@ -159,10 +168,109 @@ public class MoreFragment extends Fragment implements View.OnClickListener {
                         mLoginTV.setText(username);
                         mLoginTipsTV.setVisibility(View.INVISIBLE);
                     }
+                }else{
+                    Log.d("test0430","进入到要claerUI的逻辑");
+                    mRefresher.clearUI();
                 }
                 break;
             default:break;
         }
+    }
+
+    private void uploadRecord(){
+        String username = (String)SPUtils.get(getActivity(),"username","");
+        if(username==null||username.length()==0){
+            Toasty.error(getActivity(),"请先登录帐号，再进行数据绑定").show();
+            return;
+        }
+        String recrodURL = "http://47.100.206.82:8080/MyBOA/RecordSaveServlet?username=";
+        //发送记录的请求
+        HttpUtil.sendOkHttpJSONPost(recrodURL + username, (String) SPUtils.get(getActivity(), SPUtils.RECORD, ""), new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toasty.error(getActivity(),"网络出错，请重试").show();
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toasty.success(getActivity(),"消费记录上传完成，准备上传余额记录...").show();
+                        uploadBalance();
+                    }
+                });
+            }
+        });
+    }
+
+
+    private  void uploadBalance(){
+        String username = (String)SPUtils.get(getActivity(),"username","");
+        if(username==null||username.length()==0){
+            Toasty.error(getActivity(),"请先登录帐号，再进行数据绑定").show();
+            return;
+        }
+        String balanceURL = "http://47.100.206.82:8080/MyBOA/BalanceSaveServlet?username=";
+        String oweURL = "http://47.100.206.82:8080/MyBOA/OweSaveServlet?username=";
+        //发送记录的请求
+        HttpUtil.sendOkHttpJSONPost(balanceURL + username, (String) SPUtils.get(getActivity(), SPUtils.BALANCE_BEAN_KEY, ""), new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toasty.error(getActivity(),"网络出错，请重试").show();
+                    }
+                });
+            }
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toasty.success(getActivity(),"余额记录上传完成，准备上传欠款记录...").show();
+                        uploadOwe();
+                    }
+                });
+            }
+        });
+    }
+
+    private  void uploadOwe(){
+        String username = (String)SPUtils.get(getActivity(),"username","");
+        if(username==null||username.length()==0){
+            Toasty.error(getActivity(),"请先登录帐号，再进行数据绑定").show();
+            return;
+        }
+        String oweURL = "http://47.100.206.82:8080/MyBOA/OweSaveServlet?username=";
+        //发送记录的请求
+        HttpUtil.sendOkHttpJSONPost(oweURL + username, (String) SPUtils.get(getActivity(), SPUtils.OWE_BEAN_KEY, ""), new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toasty.error(getActivity(),"网络出错，请重试").show();
+                    }
+                });
+            }
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toasty.success(getActivity(),"服务器数据已与本地同步").show();
+                    }
+                });
+            }
+        });
     }
 
     @Override
@@ -170,4 +278,24 @@ public class MoreFragment extends Fragment implements View.OnClickListener {
         super.onResume();
         initState();
     }
+    public interface OnDataRefresh{
+        public void refreshUI();
+        public void clearUI();
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mRefresher = (OnDataRefresh) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement OnDataRefresh");
+        }
+    }
+
+    public void clearUI(){
+        mLoginTV.setText("立即登录");
+        mLoginTipsTV.setVisibility(View.VISIBLE);
+    }
+
 }

@@ -35,7 +35,7 @@ import senyu.design.myboa.fragment.TableFragment;
 import senyu.design.myboa.fragment.TaxFragment;
 import senyu.design.myboa.utils.SPUtils;
 
-public class MainActivity extends FragmentActivity implements OweFragment.UpdateOwe, BalanceFragment.UpdateBalance {
+public class MainActivity extends FragmentActivity implements OweFragment.UpdateOwe, BalanceFragment.UpdateBalance,MoreFragment.OnDataRefresh {
     PageNavigationView tab;
     MoneyFragment mMoneyFragment;
     TableFragment mTableFragment;
@@ -183,5 +183,18 @@ public class MainActivity extends FragmentActivity implements OweFragment.Update
     @Override
     public void updateOwe(Double data) {
             mMoreFragment.updateOwe(data);
+    }
+
+    @Override
+    public void refreshUI() {
+
+    }
+
+    @Override
+    public void clearUI() {
+        Log.d("test0430","MainActivtiy的claerUI");
+        mTableFragment.clearUI();
+        mMoneyFragment.clearUI();
+        mMoreFragment.clearUI();
     }
 }

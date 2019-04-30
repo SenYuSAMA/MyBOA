@@ -11,10 +11,10 @@ public class Record implements Serializable {
     private Date date;
     private String byTitle;
     private String usage;
-    private boolean plusOrNot;
+    private int plusOrNot;
 
 
-    public Record(double cost, Date date, String byTitle, String usage, boolean plusOrNot) {
+    public Record(double cost, Date date, String byTitle, String usage, int plusOrNot) {
         this.cost = cost;
         this.date = date;
         this.byTitle = byTitle;
@@ -57,11 +57,11 @@ public String getByTitle() {
         this.usage = usage;
     }
 
-    public boolean isPlusOrNot() {
+    public int isPlusOrNot() {
         return plusOrNot;
     }
 
-    public void setPlusOrNot(boolean plusOrNot) {
+    public void setPlusOrNot(int plusOrNot) {
         this.plusOrNot = plusOrNot;
     }
 

@@ -85,18 +85,6 @@ public class TableFragment extends Fragment {
 
     private void updateChart(Record record) {
         initChart();
-       /* LineData data = mLineChart.getLineData();
-        if(record.isPlusOrNot()){
-            LineDataSet dataSet = (LineDataSet) data.getDataSetByIndex(0);
-            Entry entry = new Entry(dataSet.getEntryCount(),(float)record.getCost());
-            data.addEntry(entry,0);
-        }else{
-            LineDataSet dataSet = (LineDataSet) data.getDataSetByIndex(1);
-            Entry entry = new Entry(dataSet.getEntryCount(),(float)record.getCost());
-            data.addEntry(entry,1);
-        }
-        mLineChart.notifyDataSetChanged();
-        mLineChart.invalidate();*/
     }
 
     private void initChart() {
@@ -144,7 +132,7 @@ public class TableFragment extends Fragment {
         List<Entry> entriesPos = new ArrayList<>();
         List<Entry> entriesNag = new ArrayList<>();
         for(int i = 0;i < mDatas.size();i++){
-            if(mDatas.get(i).isPlusOrNot()){
+            if(mDatas.get(i).isPlusOrNot()==1){
                 entriesPos.add(new Entry(i,(float)(mDatas.get(i).getCost())));
             }else{
                 entriesNag.add(new Entry(i,(float)(mDatas.get(i).getCost())));
@@ -164,4 +152,9 @@ public class TableFragment extends Fragment {
         mLineChart.invalidate();
     }
 
+    public void clearUI() {
+        mDatas.clear();
+        mAdapter.notifyDataSetChanged();
+        initChart();
+    }
 }

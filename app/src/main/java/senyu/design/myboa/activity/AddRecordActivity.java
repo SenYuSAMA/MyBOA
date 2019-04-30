@@ -144,7 +144,7 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
                 mRecord.setByTitle(mTwoList.get(options2).getPickerViewText());
-                mRecord.setPlusOrNot(mOneList.get(options1).equals(getResources().getString(R.string.income)));
+                mRecord.setPlusOrNot(mOneList.get(options1).equals(getResources().getString(R.string.income))?1:0);
                 mRecord.setUsage(mThreeList.get(options3));
                 String str = mOneList.get(options1) +  mTwoList.get(options2).getPickerViewText() + mThreeList.get(options3);
                 mItemTV.setText(str);

@@ -27,6 +27,7 @@ import es.dmoral.toasty.Toasty;
 import senyu.design.myboa.MyItemDragAndSwipeCallback;
 import senyu.design.myboa.R;
 import senyu.design.myboa.adapter.OweRecyclerViewAdapter;
+import senyu.design.myboa.bean.BalanceBean;
 import senyu.design.myboa.bean.OweBean;
 import senyu.design.myboa.utils.SPUtils;
 
@@ -34,6 +35,22 @@ import senyu.design.myboa.utils.SPUtils;
  * A simple {@link Fragment} subclass.
  */
 public class OweFragment extends Fragment {
+
+    public void clearUI() {
+        SPUtils.remove(getActivity(),SPUtils.OWE_BEAN_KEY);
+        mDatas.clear();
+        OweBean huabei = new OweBean(OweBean.ID.HUA_BEI, "蚂蚁花呗", R.drawable.huabei, R.drawable.alipay_bg, 0, "蚂蚁花呗使用额度");
+        OweBean baitiao = new OweBean(OweBean.ID.JD_BAITIAO, "京东白条", R.drawable.jd, R.drawable.jd_bg, 0, "京东白条使用额度");
+        OweBean bank = new OweBean(OweBean.ID.CREDIT_OWE, "信用卡欠款", R.drawable.credit_owe, R.drawable.credit_card_bg, 0, "信用卡使用额度");
+        OweBean bill = new OweBean(OweBean.ID.OWE_BILL, "借款", R.drawable.borrow, R.drawable.lent_bg, 0, "欠别人的钱");
+        mDatas.add(huabei);
+        mDatas.add(baitiao);
+        mDatas.add(bank);
+        mDatas.add(bill);
+        SPUtils.saveOweToSP(mDatas,getActivity());
+        adapter.notifyDataSetChanged();
+        countTotal();
+    }
 
     public interface UpdateOwe{
         public void updateOwe(Double data);

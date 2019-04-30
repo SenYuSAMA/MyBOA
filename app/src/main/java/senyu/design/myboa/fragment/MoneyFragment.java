@@ -138,7 +138,7 @@ public class MoneyFragment extends Fragment {
         int j = 0;
         while(i < balanceSize){
             if(title.equals(mBalanceFragment.getmDatas().get(i).getTitle())){
-                mBalanceFragment.update(i,record.getCost(),record.isPlusOrNot());
+                mBalanceFragment.update(i,record.getCost(),record.isPlusOrNot()==1);
                 return;
             }
             i++;
@@ -146,10 +146,15 @@ public class MoneyFragment extends Fragment {
 
         while( j < oweSize){
             if(title.equals(mOweFragment.getmDatas().get(j).getTitle())){
-                mOweFragment.update(j,record.getCost(),record.isPlusOrNot());
+                mOweFragment.update(j,record.getCost(),record.isPlusOrNot()==1);
                 return;
             }
             j++;
         }
+    }
+
+    public void clearUI() {
+        mBalanceFragment.clearUI();
+        mOweFragment.clearUI();
     }
 }

@@ -22,7 +22,7 @@ public class TableAdapter extends BaseItemDraggableAdapter<Record, BaseViewHolde
     @SuppressLint("ResourceAsColor")
     @Override
     protected void convert(BaseViewHolder helper, Record item) {
-        if(!item.isPlusOrNot()){
+        if(item.isPlusOrNot()==0){
             helper.setText(R.id.type_tv,R.string.cost);
             helper.setText(R.id.cost_tv,"-"+String.valueOf(item.getCost())+"￥");
             helper.setTextColor(R.id.type_tv,mContext.getResources().getColor(R.color.pig_color_4));

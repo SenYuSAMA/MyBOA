@@ -86,7 +86,7 @@ public class JSONUtil {
                     Record bean = new Record();
                     bean.setCost(balanceJO.getDouble("cost"));
                     bean.setUsage(balanceJO.getString("usage"));
-                    bean.setPlusOrNot(balanceJO.getInt("isplusornot")==1);
+                    bean.setPlusOrNot(balanceJO.getInt("isplusornot"));
                     bean.setByTitle(balanceJO.getString("bytitle"));
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                     Date date = sdf.parse((balanceJO.getString("date")));
